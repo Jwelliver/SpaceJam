@@ -1,0 +1,9 @@
+053124
+
+- [x] finish implementing energy
+
+- [x] add siren and light at >90% damage
+
+- [] refactor damageOnImpact so that owners are detecting other collisions instead of sending damage on impact.
+- [] damageOnImpact can search for InflictDamage script on colliding object to check for extra damage other than impulse force damage
+- [] projectiles can use InflictDamage script.. this can also be where different damage types are defined.
