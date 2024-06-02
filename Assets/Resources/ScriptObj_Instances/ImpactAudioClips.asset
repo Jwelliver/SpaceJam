@@ -13,3 +13,14 @@ MonoBehaviour:
   m_Name: ImpactAudioClips
   m_EditorClassIdentifier: 
   defaultCatchAllClip: {fileID: 8300000, guid: 8420c716430742e4991a655c4491d773, type: 3}
+  interactionsRef:
+  - tag: Ship
+    defaultValue: {fileID: 8300000, guid: 8420c716430742e4991a655c4491d773, type: 3}
+    interactions:
+    - otherTag: Asteroid
+      value: {fileID: 8300000, guid: 8420c716430742e4991a655c4491d773, type: 3}
+  - tag: Asteroid
+    defaultValue: {fileID: 8300000, guid: acfa8490b8276094e96a494dbecf9706, type: 3}
+    interactions:
+    - otherTag: Asteroid
+      value: {fileID: 8300000, guid: acfa8490b8276094e96a494dbecf9706, type: 3}

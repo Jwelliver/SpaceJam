@@ -6,11 +6,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptObjs/ImpactAudioClipStore")]
 public class ImpactAudioClipStore : ScriptableObject
 {
-
     [SerializeField] AudioClip defaultCatchAllClip;
-    [SerializeField] List<Interactions<AudioClip>> interactionsRef = new List<Interactions<AudioClip>>();
-    // {tag:{otherTag, interactionAudioClip}} // e.g. interactions[asteroid][asteroid] or interactions[ship][asteroid]
-    Dictionary<string, Dictionary<string, AudioClip>> interactions = new Dictionary<string, Dictionary<string, AudioClip>>();
+    [SerializeField] List<Interactions<AudioClip>> interactionsRef = new List<Interactions<AudioClip>>(); //for serialized inspector use only; converted to dict OnEnable
+
+    Dictionary<string, Dictionary<string, AudioClip>> interactions = new Dictionary<string, Dictionary<string, AudioClip>>(); // {tag:{otherTag, interactionAudioClip}} // e.g. interactions[asteroid][asteroid] or interactions[ship][asteroid]
 
     void OnEnable()
     {
@@ -18,7 +17,8 @@ public class ImpactAudioClipStore : ScriptableObject
         interactions = new Dictionary<string, Dictionary<string, AudioClip>>();
         foreach (Interactions<AudioClip> i in interactionsRef)
         {
-            if (!interactions.ContainsKey(i.tag)) { interactions.Add(i.tag, i.GetAsDict()); }
+            string tag = i.tag.ToLower();
+            if (!interactions.ContainsKey(tag)) { interactions.Add(tag, i.GetAsDict()); }
         }
     }
 
@@ -38,7 +38,6 @@ public class ImpactAudioClipStore : ScriptableObject
             if (interactions[otherTag].ContainsKey(tag)) { return interactions[otherTag][tag]; }
             else if (interactions[otherTag].ContainsKey("default")) { return interactions[otherTag]["default"]; }
         }
-
         // If nothing found, use catchAll clip
         return defaultCatchAllClip;
     }
@@ -63,44 +62,9 @@ class Interactions<T>
         Dictionary<string, T> dict = new Dictionary<string, T>();
         foreach (Interaction<T> interaction in interactions)
         {
-            dict.Add(interaction.otherTag, interaction.value);
+            string tag = interaction.otherTag.ToLower();
+            dict.Add(tag, interaction.value);
         }
         return dict;
     }
 }
-
-
-
-
-
-//========== this version attempts to use straight dictionary; but forgot dict is not serializable
-// [CreateAssetMenu(menuName = "ScriptObjs/ImpactAudioClipStore")]
-// public class ImpactAudioClipStore : ScriptableObject
-// {
-//     // {tag:{otherTag, interactionAudioClip}} // e.g. interactions[asteroid][asteroid] or interactions[ship][asteroid]
-//     [SerializeField] AudioClip defaultCatchAllClip;
-//     [SerializeField] Dictionary<string, Dictionary<string, AudioClip>> interactions = new Dictionary<string, Dictionary<string, AudioClip>>();
-
-
-//     public AudioClip GetImpactAudioClip(string tag, string otherTag)
-//     {
-
-//         // If we have primary tag;
-//         if (interactions.ContainsKey(tag))
-//         {   // check if we have a defined interaction with otherTag
-//             if (interactions[tag].ContainsKey(otherTag)) { return interactions[tag][otherTag]; }
-//             // if not, try to find a default clip
-//             else if (interactions[tag].ContainsKey("default")) { return interactions[tag]["default"]; }
-//         }
-
-//         // If we haven't found something, try reversing tags
-//         if (interactions.ContainsKey(otherTag))
-//         {
-//             if (interactions[otherTag].ContainsKey(tag)) { return interactions[otherTag][tag]; }
-//             else if (interactions[otherTag].ContainsKey("default")) { return interactions[otherTag]["default"]; }
-//         }
-
-//         // If nothing found, use catchAll clip
-//         return defaultCatchAllClip;
-//     }
-// }

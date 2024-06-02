@@ -60,7 +60,6 @@ public class CockpitUI : MonoBehaviour
         damagePctTextMesh.color = Color.Lerp(goodColor, badColor, damagePct);
     }
 
-
     void SetWarningLightActive(bool isActive)
     {
         warningLight.enabled = isActive;
@@ -94,7 +93,7 @@ public class CockpitUI : MonoBehaviour
     void HandleWarningLight()
     {
         float newIntensity = initialWarningLightIntensity * (0.5f + 0.5f * Mathf.Sin(Time.time * warningLightBrightnessRate));
-        Debug.Log("Handling Warning Light: intensity: " + newIntensity);
+        // Debug.Log("Handling Warning Light: intensity: " + newIntensity);
         warningLight.intensity = newIntensity;
     }
 

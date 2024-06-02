@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 9047525068044279362}
   - component: {fileID: 3445768148110150282}
-  - component: {fileID: 1236523711871403020}
-  - component: {fileID: 1547061971912393072}
   - component: {fileID: 4464159743873855096}
+  - component: {fileID: 8900811962766337385}
+  - component: {fileID: 4399443337310232857}
   m_Layer: 6
   m_Name: Projectile_Laser
-  m_TagString: Untagged
+  m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,9 +44,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3319725371377787557}
   serializedVersion: 4
-  m_Mass: 0.05
+  m_Mass: 0.1
   m_Drag: 0
-  m_AngularDrag: 1
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -63,35 +63,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &1236523711871403020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3319725371377787557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b999251e48ab106418aaf9d6be852f5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useImpactForceBasedDamage: 0
-  destroyOnImpact: 1
-  damageAmount: 100
-  ownerTag: 
---- !u!114 &1547061971912393072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3319725371377787557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd6a6361942de7f4a94aae313c9e5f0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeUntilDestroy: 2
 --- !u!108 &4464159743873855096
 Light:
   m_ObjectHideFlags: 0
@@ -154,6 +125,41 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &8900811962766337385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3319725371377787557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c07a6e30d0e1f948ab0c06eef521074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileType: 0
+  speed: 500
+--- !u!135 &4399443337310232857
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3319725371377787557}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5322710454533967106
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +174,7 @@ GameObject:
   - component: {fileID: 1622333762292963324}
   m_Layer: 6
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -255,7 +261,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2

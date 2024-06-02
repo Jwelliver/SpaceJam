@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5535770560621170306}
   - component: {fileID: 1665478942450739778}
   - component: {fileID: 9017123965781738624}
-  - component: {fileID: 3223180458941521699}
+  - component: {fileID: 6439001890722322021}
   - component: {fileID: 1012754294339911699}
   m_Layer: 0
   m_Name: Asteroid
@@ -151,11 +151,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDamage: 400
   damageTaken: 0
-  moveAudioSourceToImpact: 0
-  onDestroyAudioPrefab: {fileID: 7162359282149615782, guid: df89a11c0eb5d264083ed16c58208f7d, type: 3}
-  audioSource: {fileID: 1012754294339911699}
-  onDamageClip: {fileID: 8300000, guid: acfa8490b8276094e96a494dbecf9706, type: 3}
-  onDestroyedClip: {fileID: 8300000, guid: 61b53dc66b6f3cc448dfa104a184463b, type: 3}
 --- !u!114 &9017123965781738624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +168,9 @@ MonoBehaviour:
   particle: {fileID: 188401259799601601, guid: 05ba53c238748194c98c70577ed68807, type: 3}
   useMyMaterial: 1
   particleMaterial: {fileID: 0}
---- !u!114 &3223180458941521699
+  ExplosionFXprefab: {fileID: 4182796200484026909, guid: 352d6fcd8d53ecb4a9218697f9b97369, type: 3}
+  explosionSound: {fileID: 8300000, guid: 5870b62afd78994449adbf1221bbd9c7, type: 3}
+--- !u!114 &6439001890722322021
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,13 +179,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3079860194593725249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b999251e48ab106418aaf9d6be852f5e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f9e8e5ffeea74843913815b9bd0dcbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useImpactForceBasedDamage: 1
-  destroyOnImpact: 0
-  damageAmount: 0
-  ownerTag: 
+  damageMultiplier: 0.5
 --- !u!82 &1012754294339911699
 AudioSource:
   m_ObjectHideFlags: 0

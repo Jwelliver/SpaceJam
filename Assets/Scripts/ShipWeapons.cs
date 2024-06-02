@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +7,14 @@ public class ShipWeapons : MonoBehaviour
 {
     public Transform leftGun;
     public Transform rightGun;
-    public Transform projectilePrefab;
+    // public Transform projectilePrefab;
+    public PrefabPool prefabPool;
     public ShipController shipController;
     public AudioClip projectileSound;
     public float projectileSpeed = 500;
     public float fireRate;
     private float lastFireTime = 0;
+    private Transform activeWeapon;
     private bool wasLastFireLeft;
     private AudioSource rightGunAudioSource;
     private AudioSource leftGunAudioSource;
@@ -21,6 +24,9 @@ public class ShipWeapons : MonoBehaviour
     {
         leftGunAudioSource = leftGun.GetComponent<AudioSource>();
         rightGunAudioSource = rightGun.GetComponent<AudioSource>();
+        // prefabPool.OnReturnToPool = ResetProjectile;
+        prefabPool.OnInstantiate = InitProjectile;
+        // prefabPool.OnGet = OnGetProjectile;
     }
 
     public void TryFireWeapon()
@@ -31,18 +37,33 @@ public class ShipWeapons : MonoBehaviour
         }
     }
 
+    void InitProjectile(Transform projectileTransform)
+    { //* This is run by the prefabPool when instantiating a new projectile
+        projectileTransform.GetComponent<Projectile>().OnDisableAction = prefabPool.ReturnToPool;
+    }
+    // void ResetProjectile(Transform projectileTransform)
+    // {
+    //     projectileTransform.GetComponent<Rigidbody>().velocity = Vector3.zero;
+    //     projectileTransform.rotation = Quaternion.identity;
+    // }
+
     void FireWeapon()
     {
-        Transform weapon = wasLastFireLeft ? rightGun : leftGun;
+        activeWeapon = wasLastFireLeft ? rightGun : leftGun;
         AudioSource audioSource = wasLastFireLeft ? rightGunAudioSource : leftGunAudioSource;
-        audioSource.Stop();
-        Transform newProjectile = Instantiate(projectilePrefab, weapon.position, weapon.rotation);
-        newProjectile.GetComponent<DamageOnImpact>().ownerTag = transform.root.tag;
-        newProjectile.GetComponent<Rigidbody>().velocity = shipController.shipRb.velocity + transform.forward * projectileSpeed;
-        audioSource.PlayOneShot(projectileSound);
-        wasLastFireLeft = !wasLastFireLeft;
-        lastFireTime = Time.time;
-        shipController.shipEnergy.OnWeaponFired();
+        // audioSource.Stop();
+        try
+        {
+            prefabPool.Get().GetComponent<Projectile>().OnFire(shipController.shipRb.velocity, activeWeapon);
+            audioSource.PlayOneShot(projectileSound);
+            wasLastFireLeft = !wasLastFireLeft;
+            lastFireTime = Time.time;
+            shipController.shipEnergy.OnWeaponFired();
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Could Not fire." + e);
+        }
     }
 
 }
