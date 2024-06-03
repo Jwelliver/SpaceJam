@@ -10,4 +10,16 @@
 
 ==
 
-- Projectiles: fix colliding with ship; don't activate on pool.GET(), instead, preset position and velocity before activating
+- Just finished ImpactFX and object pooling
+
+  - Note: Lasers are weird now.. seemingly visually inconsistent when firing;
+    - There was an odd issue where the prefabpool was throwing errors about attempting to add an existing key to the pendingReturn list, meaning there were objects still in the pendingReturn list that were also being dequed in the Get() method.. not sure how.
+      ... ignored this and used TryAdd method instead of Add, but I'm curious about why that's happening, and guessing it's related to this inconsistency issue.
+
+- ExplosionFX is WIP; but good enough - see todos
+
+- [] Add Missle;
+  - [] Create middle obj
+  - [] Add Homing using large sphere trigger
+  - [] Add MissleTrackable script to objects that can be homed on by missle
+  - [] When missle in another, smaller range, add explosion force.. apply damage based on distance.
