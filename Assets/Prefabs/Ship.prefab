@@ -2766,8 +2766,8 @@ MonoBehaviour:
   particle: {fileID: 2286175368409906244, guid: c35536a2294aff9489f3e1c371208c4f, type: 3}
   useMyMaterial: 1
   particleMaterial: {fileID: 0}
-  ExplosionFXprefab: {fileID: 0}
-  explosionSound: {fileID: 0}
+  ExplosionFXprefab: {fileID: 4182796200484026909, guid: 352d6fcd8d53ecb4a9218697f9b97369, type: 3}
+  explosionSound: {fileID: 8300000, guid: 5870b62afd78994449adbf1221bbd9c7, type: 3}
 --- !u!1001 &51169700171709999
 PrefabInstance:
   m_ObjectHideFlags: 0
