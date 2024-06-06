@@ -18,8 +18,24 @@
 
 - ExplosionFX is WIP; but good enough - see todos
 
-- [] Add Missle;
-  - [] Create middle obj
-  - [] Add Homing using large sphere trigger
-  - [] Add MissleTrackable script to objects that can be homed on by missle
-  - [] When missle in another, smaller range, add explosion force.. apply damage based on distance.
+- [x] Add Missle;
+
+  - [x] Create missle obj
+  - [x] Add Homing using large sphere trigger
+  - [x] Add MissleTrackable script to objects that can be homed on by missle
+  - [x] When missle in another, smaller range, add explosion force.. apply damage based on distance.
+    - [] Add Projectile class to handle speed
+
+- [] Guns should not handle projectile speed
+
+  - [] Update Laser and Projectile script
+    - [] Projectile should handle lifetime and the OnDisable/lifeEnd action
+
+- [] Add Shield
+
+- [] Add EnergyManagement
+
+- [] Add Camera wobble
+
+- [] Add head movement ?
+  - either use left stick and move yaw? Or maybe use left stick while pressed and move DampingDisable to another control

@@ -20,6 +20,7 @@ public class ShipController : MonoBehaviour
     public Camera mainCam;
     public ShipEnergy shipEnergy;
     public ShipWeapons shipWeapons;
+    public Transform misslePrefab; //! Temp for testing; Move to weapons
     public Rigidbody shipRb;
     public AudioSource engineAudio1;
     public AudioSource engineAudio2;
@@ -28,6 +29,7 @@ public class ShipController : MonoBehaviour
     float rollInput;
     float yawInput;
     float thrustInput;
+    bool disableDamping;
     Vector3 prevAngularVelocity = new Vector3(0, 0, 0);
 
     void Awake()
@@ -41,9 +43,16 @@ public class ShipController : MonoBehaviour
         pitchInput = Input.GetAxis("RS_v");
         yawInput = Input.GetAxis("LS_h");
         thrustInput = Input.GetAxis("Triggers");
+        disableDamping = Input.GetButton("DisableDamping");
         if (Input.GetButton("Fire1") && shipEnergy.CanFireWeapon())
         {
             shipWeapons.TryFireWeapon();
+        }
+
+        //TODO: TEMP Create missle; Add missle count and regen
+        if (Input.GetButtonDown("Fire2"))
+        {
+            FireMissle();
         }
 
 
@@ -113,7 +122,7 @@ public class ShipController : MonoBehaviour
             if (amt > 0) { shipEnergy.OnManeuver(amt); }
 
             //Handle Damping
-            ApplyDamping();
+            if (!disableDamping) ApplyDamping();
         }
         else
         {
@@ -192,6 +201,15 @@ public class ShipController : MonoBehaviour
         }
         engineAudio1.pitch = newPitch1;
         engineAudio2.pitch = newPitch2;
+    }
+
+
+    void FireMissle()
+    {
+        Transform newMissle = Instantiate(misslePrefab, transform.position - new Vector3(0, 2, 1), transform.rotation);
+        Missile m = newMissle.GetComponent<Missile>();
+        m.owner = transform;
+        newMissle.GetComponent<Rigidbody>().velocity = shipRb.velocity;
     }
 
 }

@@ -497,6 +497,7 @@ MonoBehaviour:
   mainCam: {fileID: 1120606464169281761}
   shipEnergy: {fileID: 8825525277968439940}
   shipWeapons: {fileID: 2576905408924905750}
+  misslePrefab: {fileID: 3015005104532289068, guid: 4bc04cc3ac802aa4d905d589c7d2e7c7, type: 3}
   shipRb: {fileID: 0}
   engineAudio1: {fileID: 5621974737978333965}
   engineAudio2: {fileID: 6024532248503194852}
