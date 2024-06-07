@@ -4,9 +4,9 @@
 
 - [x] add siren and light at >90% damage
 
-- [] refactor damageOnImpact so that owners are detecting other collisions instead of sending damage on impact.
-- [] damageOnImpact can search for InflictDamage script on colliding object to check for extra damage other than impulse force damage
-- [] projectiles can use InflictDamage script.. this can also be where different damage types are defined.
+- [x] refactor damageOnImpact so that owners are detecting other collisions instead of sending damage on impact.
+  - damageOnImpact can search for InflictDamage script on colliding object to check for extra damage other than impulse force damage
+  - projectiles can use InflictDamage script.. this can also be where different damage types are defined.
 
 ==
 
@@ -26,6 +26,13 @@
   - [x] When missle in another, smaller range, add explosion force.. apply damage based on distance.
     - [] Add Projectile class to handle speed
 
+  - [] Add ExplosionFX to missile
+
+
+- [] Create ProjectileSpawner
+  - Uses dedicated pool based on prefab
+  - Projectile Class should have OnSpawn and OnDespawn ? This can set the behavior for resetting and returning to the pool; (might eliminate the weirdness w/ current PrefabPool's return queue)
+
 - [] Guns should not handle projectile speed
 
   - [] Update Laser and Projectile script
@@ -35,7 +42,21 @@
 
 - [] Add EnergyManagement
 
-- [] Add Camera wobble
+- [x] Add Camera wobble
+  - [] try w/out physics; And/or look into referencing inertia to programatically move; Or see if there's a way to get spring behavior using acceleration instead of force.
 
-- [] Add head movement ?
+- [] Add lookaround movement input?
   - either use left stick and move yaw? Or maybe use left stick while pressed and move DampingDisable to another control
+
+- [] Create new control map:
+  - use triggers for yaw
+  - single stick for pitch+roll
+  - other stick can be either translation or lookaround.
+
+- [] look into using decals
+  - [] to project text onto glass
+  - [] to project animated effect onto spherical shield upon impact (?)
+
+- [] consider revamping movement to use real thrusters. (also add fx)
+
+- [] Fix ShipThrust sound fx to gradually increase pitcch
