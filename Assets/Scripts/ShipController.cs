@@ -56,9 +56,6 @@ public class ShipController : MonoBehaviour
     void OnYaw(InputValue v) => yawInput = v.Get<float>();
     void OnThrust(InputValue v) => thrustInput = v.Get<float>();
     void OnToggleFreeFlight() => isFreeFlightEnabled = !isFreeFlightEnabled;
-    // void OnFirePrimary() {
-    //     if(shipEnergy.CanFireWeapon()) shipWeapons.TryFireWeapon();
-    // }
     void OnFireSecondary() { // //TODO: TEMP Create missle; Add missle count and regen
         FireMissle();
     }
