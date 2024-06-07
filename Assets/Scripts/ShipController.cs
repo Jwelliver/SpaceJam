@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ShipController : MonoBehaviour
 
@@ -17,6 +18,7 @@ public class ShipController : MonoBehaviour
     public float yawSpeed = 2f;
     public float maxSpeed = 20f;
     public float dampingRate = 0.1f;
+    public PlayerInput playerInput;
     public Camera mainCam;
     public ShipEnergy shipEnergy;
     public ShipWeapons shipWeapons;
@@ -29,7 +31,7 @@ public class ShipController : MonoBehaviour
     float rollInput;
     float yawInput;
     float thrustInput;
-    bool disableDamping;
+    bool isFreeFlightEnabled;
     Vector3 prevAngularVelocity = new Vector3(0, 0, 0);
 
     void Awake()
@@ -39,24 +41,26 @@ public class ShipController : MonoBehaviour
 
     void Update()
     {
-        rollInput = Input.GetAxis("RS_h");
-        pitchInput = Input.GetAxis("RS_v");
-        yawInput = Input.GetAxis("LS_h");
-        thrustInput = Input.GetAxis("Triggers");
-        disableDamping = Input.GetButton("DisableDamping");
-        if (Input.GetButton("Fire1") && shipEnergy.CanFireWeapon())
+        
+        if (playerInput.actions["FirePrimary"].IsPressed())
         {
-            shipWeapons.TryFireWeapon();
-        }
-
-        //TODO: TEMP Create missle; Add missle count and regen
-        if (Input.GetButtonDown("Fire2"))
-        {
-            FireMissle();
+            if(shipEnergy.CanFireWeapon()) shipWeapons.TryFireWeapon();
         }
 
 
         // Debug.Log("pitch: " + pitchInput + " roll: " + rollInput + " | yaw: " + yawInput + " | thrust:" + thrustInput);
+    }
+
+    void OnRoll(InputValue v) => rollInput = v.Get<float>();
+    void OnPitch(InputValue v) => pitchInput = v.Get<float>();
+    void OnYaw(InputValue v) => yawInput = v.Get<float>();
+    void OnThrust(InputValue v) => thrustInput = v.Get<float>();
+    void OnToggleFreeFlight() => isFreeFlightEnabled = !isFreeFlightEnabled;
+    // void OnFirePrimary() {
+    //     if(shipEnergy.CanFireWeapon()) shipWeapons.TryFireWeapon();
+    // }
+    void OnFireSecondary() { // //TODO: TEMP Create missle; Add missle count and regen
+        FireMissle();
     }
 
 
@@ -122,7 +126,7 @@ public class ShipController : MonoBehaviour
             if (amt > 0) { shipEnergy.OnManeuver(amt); }
 
             //Handle Damping
-            if (!disableDamping) ApplyDamping();
+            if (!isFreeFlightEnabled) ApplyDamping();
         }
         else
         {
