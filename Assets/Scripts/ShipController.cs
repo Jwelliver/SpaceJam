@@ -34,11 +34,6 @@ public class ShipController : MonoBehaviour
     bool isFreeFlightEnabled;
     Vector3 prevAngularVelocity = new Vector3(0, 0, 0);
 
-    void Awake()
-    {
-        shipRb = GetComponent<Rigidbody>();
-    }
-
     void Update()
     {
         
@@ -46,9 +41,6 @@ public class ShipController : MonoBehaviour
         {
             if(shipEnergy.CanFireWeapon()) shipWeapons.TryFireWeapon();
         }
-
-
-        // Debug.Log("pitch: " + pitchInput + " roll: " + rollInput + " | yaw: " + yawInput + " | thrust:" + thrustInput);
     }
 
     void OnRoll(InputValue v) => rollInput = v.Get<float>();
@@ -59,7 +51,6 @@ public class ShipController : MonoBehaviour
     void OnFireSecondary() { // //TODO: TEMP Create missle; Add missle count and regen
         FireMissle();
     }
-
 
     void OnApplicationQuit()
     {
@@ -203,7 +194,6 @@ public class ShipController : MonoBehaviour
         engineAudio1.pitch = newPitch1;
         engineAudio2.pitch = newPitch2;
     }
-
 
     void FireMissle()
     {
