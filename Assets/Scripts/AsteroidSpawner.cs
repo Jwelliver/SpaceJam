@@ -18,7 +18,21 @@ public class AsteroidSpawner : MonoBehaviour
     
 
     void Start() {
-        SpawnField(new Vector3(0,0,0), new Vector3(Random.Range(20,50),Random.Range(20,50),Random.Range(20,50)), 0.001f, 20,0.5f, 2);
+        InitFields();
+    }
+
+    void InitFields() {
+
+        int nFields = 5;
+        float maxDistanceFromOrigin = 500;
+        
+        float rndDistance() =>  Random.Range(-maxDistanceFromOrigin,maxDistanceFromOrigin);
+        float getRndDimension() =>  Random.Range(30,300);
+
+        for(int i=0; i<nFields; i++) {
+            Vector3 center = new Vector3(rndDistance(), rndDistance(), rndDistance());
+            SpawnField(center, new Vector3(getRndDimension(),getRndDimension(),getRndDimension()), 0.001f, 20,0.2f, 2);
+        }
     }
 
     // public void SpawnOne(Vector3 position, float minSize, float maxSize, AsteroidType asteroidType , bool applyRandomRotation=true) {
