@@ -60,3 +60,9 @@
 - [] consider revamping movement to use real thrusters. (also add fx)
 
 - [] Fix ShipThrust sound fx to gradually increase pitcch
+  - *May not be necessary if using a continuous input
+
+
+- [] Set asteroid explosion particle to asteroid mesh
+
+- [] change power UI to a meter
