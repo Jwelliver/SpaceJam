@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 4239801345615314587}
   - component: {fileID: 541007599034801641}
   - component: {fileID: 1007980794610191731}
-  - component: {fileID: 2657553477294815598}
   - component: {fileID: 5535770560621170306}
   - component: {fileID: 1665478942450739778}
   - component: {fileID: 9017123965781738624}
   - component: {fileID: 6439001890722322021}
   - component: {fileID: 1012754294339911699}
   - component: {fileID: 2106064282778552274}
+  - component: {fileID: 8567919943688580715}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Untagged
@@ -90,27 +90,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &2657553477294815598
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3079860194593725249}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5535770560621170306
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -293,3 +272,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   signatureStrength: 2
+--- !u!64 &8567919943688580715
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3079860194593725249}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 4514a249f7ca7d44b8eb4cbd48174504, type: 3}
