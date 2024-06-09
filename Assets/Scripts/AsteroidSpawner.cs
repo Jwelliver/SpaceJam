@@ -43,8 +43,10 @@ public class AsteroidSpawner : MonoBehaviour
     public void SpawnRandom(Vector3 position, float minScale=0.5f, float maxScale=2, float maxAngularVelocity=0.1f) {
         Quaternion randomRotation = Quaternion.Euler(Random.Range(0,90),Random.Range(0,90),Random.Range(0,90));
         Transform newAsteroid = Instantiate(prefab, position, randomRotation, transform );
+        Mesh rndMesh = meshes[Random.Range(0,materials.Count)];
         newAsteroid.GetComponent<MeshRenderer>().material = materials[Random.Range(0,materials.Count)];
-        newAsteroid.GetComponent<MeshFilter>().mesh = meshes[Random.Range(0,materials.Count)];
+        newAsteroid.GetComponent<MeshFilter>().mesh = rndMesh;
+        newAsteroid.GetComponent<MeshCollider>().sharedMesh = rndMesh;
         float rndScale = Random.Range(minScale,maxScale);
         newAsteroid.localScale = new Vector3(rndScale,rndScale, rndScale);
         Rigidbody _rb = newAsteroid.GetComponent<Rigidbody>();
