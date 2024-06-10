@@ -15,10 +15,11 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField] List<Mesh> meshes;
     [SerializeField] List<Material> materials;
     [SerializeField] float defaultMass;
+    [SerializeField] bool spawnFieldsOnStart;
     
 
     void Start() {
-        InitFields();
+        if(spawnFieldsOnStart) InitFields();
     }
 
     void InitFields() {
