@@ -26,7 +26,7 @@ public class RadarDisplay : MonoBehaviour
 {
     [SerializeField] Transform radar;
     [SerializeField] Transform trackedObjectsContainer;
-    [SerializeField] Transform defaultSignaturePrefab;
+    [SerializeField] Transform defaultBlipPrefab;
     [SerializeField] float radarRadius;
     [SerializeField] float displayScale = 0.05f;
     [SerializeField] float refreshRate = -1; //-1=realtime
@@ -85,20 +85,24 @@ public class RadarDisplay : MonoBehaviour
     }
 
     void ActivateTrackedObject(Collider col) {
-        FindRadarTrackedObject(col).SetIsActive(true);
+        RadarTrackedObj trackedObj = FindRadarTrackedObject(col);
+        if(trackedObj!=null) trackedObj.SetIsActive(true);
     }
 
     void DeactivateTrackedObject(Collider col) {
-        FindRadarTrackedObject(col).SetIsActive(false);
+        RadarTrackedObj trackedObj = FindRadarTrackedObject(col, false);
+        if(trackedObj!=null) trackedObj.SetIsActive(false);
     }
 
     RadarTrackedObj AddNewTrackedObject(Collider col) {
+        if(isExcludedCollider(col)) {return null;}
         int id = col.transform.GetInstanceID();
         if(trackedObjectsById.ContainsKey(id)) { //return existing obj if found
             return trackedObjectsById[id];
         }
-        Transform radarSignatureTransform = Instantiate(defaultSignaturePrefab, trackedObjectsContainer);
-        RadarTrackedObj newTrackedObj = new RadarTrackedObj(col.transform, radarSignatureTransform);
+        Transform blip = Instantiate(defaultBlipPrefab, trackedObjectsContainer);
+        blip.name = "Blip - "+ col.transform.name;
+        RadarTrackedObj newTrackedObj = new RadarTrackedObj(col.transform, blip);
         trackedObjectsById.Add(id, newTrackedObj);
         return newTrackedObj;
     }
@@ -119,6 +123,7 @@ public class RadarDisplay : MonoBehaviour
     }
 
     Vector3 GetBlipScale(RadarTrackedObj trackedObj) {
+         //TODO: Implement a base scale (scale multiplier? on RadarTrackedObj) to maintain a representation of relative scale while still scaling based on distance
         float distance = Vector3.Distance(radar.position, trackedObj.obj.position);
         float pctOfMaxRange = distance/radarRadius;
         float scale = Mathf.Lerp(maxBlipScale, minBlipScale, pctOfMaxRange);
@@ -127,12 +132,12 @@ public class RadarDisplay : MonoBehaviour
     }
 
     Vector3 GetBlipPosition(RadarTrackedObj trackedObj) {
-        //TODO: Implement a base scale that this is based off of
-        Vector3 localPos = trackedObj.obj.position - radar.position;
-        Vector3 forwardProj = Vector3.ProjectOnPlane(radar.forward, Vector3.up);
-        Quaternion rotation = Quaternion.LookRotation(forwardProj, Vector3.up);
-        Vector3 rotatedPos = rotation * localPos;
-        return radarDisplay.position + rotatedPos.normalized * displayScale;//radius;
+        Vector3 posDiff = trackedObj.obj.position - radar.position;
+        float distance = posDiff.magnitude;
+        float pctMaxRng = distance/radarRadius;
+        float distanceFromCenterOfDisplay = displayScale*pctMaxRng;
+        Vector3 dir = posDiff.normalized;
+        return radarDisplay.position+dir*distanceFromCenterOfDisplay;
     }
 
     void ValidateTrackedObjects() {
@@ -153,6 +158,16 @@ public class RadarDisplay : MonoBehaviour
             return AddNewTrackedObject(col);
         }
         return null;
+    }
+
+    bool isExcludedCollider(Collider col) {
+        //Used to check if we should ignore this collider before adding it to trackedObjects
+
+        //Exclude any collider that belongs to this ship;
+        // if(col.attachedRigidbody==radarTriggerHandler.col.attachedRigidbody) {return true;}
+        if(radar.transform.root==col.transform.root) {return true;}
+        return false;
+
     }
 }
 
