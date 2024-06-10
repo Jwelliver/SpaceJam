@@ -65,9 +65,18 @@
 
 - [] Set asteroid explosion particle to asteroid mesh
 
+- [] Add smoke impact between laser and asteroid.
+  - [] set fx scale depenndent on laser charge
+
 - [] change power UI to a meter
 
-- [] Switch project renderer to URP; (to allow cinematic explosions package)
+- [x] Switch project renderer to URP; (to allow cinematic explosions package)
   - already installed URP; Just need to run the Render Pipeline Converter; **May be better off to start a new URP project and just copy in the scripts, reimport the dl'd assets, and remake the materials.
 
-- [] 
+- [] Radar Display Cont'd
+  - [] Review blip positioning method
+  - [] prevent radar from tracking own ship
+    - [] Add dedicated center blip or crosshair
+  - [] add meshes and/or dedicated blips.
+
+- [] Don't show damage UI until it's greater than zero.
