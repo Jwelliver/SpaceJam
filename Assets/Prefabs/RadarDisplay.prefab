@@ -110,12 +110,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389ea836ec7634e40912f614955b4cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myShip: {fileID: 0}
+  radar: {fileID: 0}
   trackedObjectsContainer: {fileID: 2397761803917248761}
-  defaultSignaturePrefab: {fileID: 7098336160303067476, guid: 1c978b227b1fefc4f9e6146841da71d2, type: 3}
+  defaultBlipPrefab: {fileID: 7098336160303067476, guid: 1c978b227b1fefc4f9e6146841da71d2, type: 3}
   radarRadius: 20
   displayScale: 0.01
   refreshRate: -1
+  minBlipScale: 0.0001
+  maxBlipScale: 0.005
 --- !u!1 &7170189072424509986
 GameObject:
   m_ObjectHideFlags: 0

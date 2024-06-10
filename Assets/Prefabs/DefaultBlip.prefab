@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 925156483150771433}
   - component: {fileID: 248527977466451403}
   m_Layer: 0
-  m_Name: DefaultRadarSignature
+  m_Name: DefaultBlip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
