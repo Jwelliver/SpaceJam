@@ -30,6 +30,9 @@ public class RadarDisplay : MonoBehaviour
     [SerializeField] float radarRadius;
     [SerializeField] float displayScale = 0.05f;
     [SerializeField] float refreshRate = -1; //-1=realtime
+    [Header("Blip Settings")]
+    [SerializeField] float minBlipScale = 0.0001f;
+    [SerializeField] float maxBlipScale = 0.005f;
     private Transform radarDisplay;
     private Dictionary<int, RadarTrackedObj> trackedObjectsById = new Dictionary<int, RadarTrackedObj>(); //stores RadarTrackedObj by transform's InstanceID
     private float lastRefreshTime;
@@ -66,8 +69,11 @@ public class RadarDisplay : MonoBehaviour
     {
         if(Time.time - lastRefreshTime > refreshRate) {
             RefreshDisplay();
-            
         }
+    }
+
+    public Dictionary<int, RadarTrackedObj> GetTrackedObjects() {
+        return trackedObjectsById;
     }
 
     void OnRadarEnter(string triggerId, Collider col) {
@@ -98,14 +104,31 @@ public class RadarDisplay : MonoBehaviour
     }
 
     void RefreshDisplay() {
-        foreach(RadarTrackedObj obj in trackedObjectsById.Values) {
-            obj.radarSignatureTransform.position = GetMinimapPosition(obj.actualTransform.position);
+        foreach(RadarTrackedObj trackedObj in trackedObjectsById.Values) {
+            if(!trackedObj.GetIsActive()) {continue;}
+            UpdateBlip(trackedObj);
         }
         lastRefreshTime = Time.time;
     }
 
-    Vector3 GetMinimapPosition(Vector3 objectPosition) {
-        Vector3 localPos = objectPosition - radar.position;
+    void UpdateBlip(RadarTrackedObj trackedObj) {
+        // Set Position
+        trackedObj.blip.position = GetBlipPosition(trackedObj);
+        // Set Scale
+        trackedObj.blip.localScale = GetBlipScale(trackedObj);
+    }
+
+    Vector3 GetBlipScale(RadarTrackedObj trackedObj) {
+        float distance = Vector3.Distance(radar.position, trackedObj.obj.position);
+        float pctOfMaxRange = distance/radarRadius;
+        float scale = Mathf.Lerp(maxBlipScale, minBlipScale, pctOfMaxRange);
+        // Debug.Log("GetBlipScale() > "+ "distance: "+distance+" pctMaxRng: "+pctOfMaxRange+" scale: "+scale);
+        return new Vector3(scale,scale,scale);
+    }
+
+    Vector3 GetBlipPosition(RadarTrackedObj trackedObj) {
+        //TODO: Implement a base scale that this is based off of
+        Vector3 localPos = trackedObj.obj.position - radar.position;
         Vector3 forwardProj = Vector3.ProjectOnPlane(radar.forward, Vector3.up);
         Quaternion rotation = Quaternion.LookRotation(forwardProj, Vector3.up);
         Vector3 rotatedPos = rotation * localPos;
@@ -138,21 +161,33 @@ public class RadarTrackedObj {
 
     public int rootId;
     public int colliderId;
-    public Transform actualTransform;
-    public Transform radarSignatureTransform;
+    public Transform obj;
+    public Transform blip;
     private bool isActive = true;
 
-    public RadarTrackedObj(Transform actualTransform, Transform radarSignatureTransform) {
-        this.actualTransform = actualTransform;
-        this.radarSignatureTransform = radarSignatureTransform;
-        this.rootId = actualTransform.root.GetInstanceID();
-        this.colliderId = actualTransform.GetInstanceID(); //TODO: May want to utilize root instance ID for tracking
+    public RadarTrackedObj(Transform obj, Transform blip) {
+        this.obj = obj;
+        this.blip = blip;
+        this.rootId = obj.root.GetInstanceID();
+        this.colliderId = obj.GetInstanceID(); //TODO: May want to utilize root instance ID for tracking
     }
 
     public bool GetIsActive() => this.isActive;
 
     public void SetIsActive(bool newValue) {
         this.isActive = newValue;
-        this.radarSignatureTransform.gameObject.SetActive(newValue);
+        this.blip.gameObject.SetActive(newValue);
     }
+}
+
+public class RadarBlipUpdater {
+    RadarDisplay radarDisplay;
+    public RadarBlipUpdater(RadarDisplay radarDisplay) {
+        this.radarDisplay = radarDisplay;
+    }
+
+    public void UpdateBlips() {
+
+    }
+
 }
