@@ -13,7 +13,7 @@ public class Missile : MonoBehaviour
     public float explosiveForce;
     public float lifeTime;
     public float armDelay;
-    public Transform owner;
+    public int ownerId;
     public AudioClip detonation;
     private Rigidbody rb;
     private List<TrackedTarget> trackedTargets = new List<TrackedTarget>();
@@ -95,7 +95,7 @@ public class Missile : MonoBehaviour
     {
         if (col.TryGetComponent<MissileTrackable>(out MissileTrackable potentialTarget))
         {
-            if (potentialTarget.transform == owner) { return; }
+            if (potentialTarget.transform.root.GetInstanceID() == ownerId) { return; }
             trackedTargets.Add(new TrackedTarget(potentialTarget.transform));
             RecalculateCurrentTarget();
         }

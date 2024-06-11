@@ -199,7 +199,7 @@ public class ShipController : MonoBehaviour
     {
         Transform newMissle = Instantiate(misslePrefab, transform.position - new Vector3(0, 2, 1), transform.rotation);
         Missile m = newMissle.GetComponent<Missile>();
-        m.owner = transform;
+        m.ownerId = transform.root.GetInstanceID();
         newMissle.GetComponent<Rigidbody>().velocity = shipRb.velocity;
     }
 
