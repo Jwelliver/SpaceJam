@@ -74,9 +74,10 @@
   - already installed URP; Just need to run the Render Pipeline Converter; **May be better off to start a new URP project and just copy in the scripts, reimport the dl'd assets, and remake the materials.
 
 - [] Radar Display Cont'd
-  - [] Review blip positioning method
-  - [] prevent radar from tracking own ship
-    - [] Add dedicated center blip or crosshair
+  - [x] Review blip positioning method
+  - [x] prevent radar from tracking own ship
+    - [x] Add dedicated center blip or crosshair
   - [] add meshes and/or dedicated blips.
+  - ! [x] Bug: Occasionally got a transform null ref when testing; 
 
 - [] Don't show damage UI until it's greater than zero.
