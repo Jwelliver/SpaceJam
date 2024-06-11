@@ -100,11 +100,40 @@ public class RadarDisplay : MonoBehaviour
         if(trackedObjectsById.ContainsKey(id)) { //return existing obj if found
             return trackedObjectsById[id];
         }
-        Transform blip = Instantiate(defaultBlipPrefab, trackedObjectsContainer);
-        blip.name = "Blip - "+ col.transform.name;
+        Transform blip = InitBlip(col);
         RadarTrackedObj newTrackedObj = new RadarTrackedObj(col.transform, blip);
         trackedObjectsById.Add(id, newTrackedObj);
         return newTrackedObj;
+    }
+
+    Transform InitBlip(Collider col) {
+        Transform newBlip = Instantiate(defaultBlipPrefab, trackedObjectsContainer);
+        newBlip.name = "Blip - "+ col.transform.name;
+        //!Crude approach; Make RadarTrackable with types and place that on each gameobject; Have them register to a static list and radars will reference that to check position and get trackedObject data; Blip presets can be made on SO w/ blipPrefab, material, and scale multiplier
+        float scaleMultiplier = 0.3f;
+        Color blipColor = Color.grey;
+        
+        string tag = col.attachedRigidbody.transform.tag.ToLower();
+        switch(tag) {
+            case "asteroid": {
+                scaleMultiplier= 0.2f;
+                blipColor = Color.green;
+                break;
+            }
+            case "ship": {
+                scaleMultiplier= 0.7f;
+                blipColor = Color.red;
+                break;
+            }
+            case "missile": {
+                scaleMultiplier= 0.5f;
+                blipColor = new Color(255,0,255);
+                break;
+            }
+        }
+        newBlip.localScale *= scaleMultiplier;
+        newBlip.GetComponent<MeshRenderer>().material.color = blipColor;
+        return newBlip;
     }
 
     void RefreshDisplay() {
@@ -119,9 +148,9 @@ public class RadarDisplay : MonoBehaviour
         trackedObj.Validate();
         if(trackedObj.isDestroyed||!trackedObj.GetIsActive()) {return;}
         // Set Position
-        trackedObj.blip.position = GetBlipPosition(trackedObj);
+        UpdateBlipPosition(trackedObj);
         // Set Scale
-        trackedObj.blip.localScale = GetBlipScale(trackedObj);
+        // UpdateBlipScale_ByDistance(trackedObj);
     }
 
     void UpdateBlipMaterial() {
@@ -129,22 +158,22 @@ public class RadarDisplay : MonoBehaviour
     }
 
 
-    Vector3 GetBlipScale(RadarTrackedObj trackedObj) {
+    void UpdateBlipScale_ByDistance(RadarTrackedObj trackedObj) {
          //TODO: Implement a base scale (scale multiplier? on RadarTrackedObj) to maintain a representation of relative scale while still scaling based on distance
         float distance = Vector3.Distance(radar.position, trackedObj.obj.position);
         float pctOfMaxRange = distance/radarRadius;
         float scale = Mathf.Lerp(maxBlipScale, minBlipScale, pctOfMaxRange);
         // Debug.Log("GetBlipScale() > "+ "distance: "+distance+" pctMaxRng: "+pctOfMaxRange+" scale: "+scale);
-        return new Vector3(scale,scale,scale);
+        trackedObj.blip.localScale = new Vector3(scale,scale,scale);
     }
 
-    Vector3 GetBlipPosition(RadarTrackedObj trackedObj) {
+    void UpdateBlipPosition(RadarTrackedObj trackedObj) {
         Vector3 posDiff = trackedObj.obj.position - radar.position;
         float distance = posDiff.magnitude;
         float pctMaxRng = distance/radarRadius;
-        float distanceFromCenterOfDisplay = displayScale*pctMaxRng;
+        float distanceFromCenterOfDisplay = displayScale*pctMaxRng; //todo: displayScale should be equal to the scale of the outerring; Then you will want to change this to (displayScale/2)*pctMaxRng;
         Vector3 dir = posDiff.normalized;
-        return radarDisplay.position+dir*distanceFromCenterOfDisplay;
+        trackedObj.blip.position = radarDisplay.position+dir*distanceFromCenterOfDisplay;
     }
 
     void InitTrackedObjects() {
@@ -173,6 +202,7 @@ public class RadarDisplay : MonoBehaviour
         //Exclude any collider that belongs to this ship;
         // if(col.attachedRigidbody==radarTriggerHandler.col.attachedRigidbody) {return true;}
         if(radar.transform.root==col.transform.root) {return true;}
+        if(col.attachedRigidbody.transform.tag.ToLower() == "laser") return true;
         return false;
 
     }
@@ -194,9 +224,6 @@ public class RadarTrackedObj {
         this.blip = blip;
         this.rootId = obj.root.GetInstanceID();
         this.colliderId = obj.GetInstanceID(); //TODO: May want to utilize root instance ID for tracking
-
-        // OnDestroyHandler onDestroyHandler = this.obj.AddComponent<OnDestroyHandler>();
-        // onDestroyHandler.onDestroy += CleanupSelf;
     }
 
     ~RadarTrackedObj() {
