@@ -32,7 +32,7 @@ public class CockpitUI : MonoBehaviour
     void Update()
     {
         //Update speed
-        speedTextMesh.text = "" + shipController.GetSpeed();
+        speedTextMesh.SetText("" + shipController.GetSpeed());
 
         //Update Damage
         UpdateDamageUI();
@@ -49,14 +49,14 @@ public class CockpitUI : MonoBehaviour
 
     void UpdateEnergyUI()
     {
-        energyTextMesh.text = "" + Mathf.Round(shipEnergy.currentEnergy);
+        energyTextMesh.SetText("" + Mathf.Round(shipEnergy.currentEnergy));
         energyTextMesh.color = Color.Lerp(goodColor, badColor, 1 - (shipEnergy.currentEnergy / shipEnergy.maxEnergy));
     }
 
     void UpdateDamageUI()
     {
         float damagePct = damageable.damageTaken / damageable.maxDamage;
-        damagePctTextMesh.text = Mathf.Round(damagePct * 100) + "%";
+        damagePctTextMesh.SetText(Mathf.Round(damagePct * 100) + "%");
         damagePctTextMesh.color = Color.Lerp(goodColor, badColor, damagePct);
     }
 
