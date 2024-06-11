@@ -55,7 +55,7 @@ public class RadarDisplay : MonoBehaviour
         radarTriggerHandler.OnEnter+=OnRadarEnter;
         radarTriggerHandler.OnExit+=OnRadarExit;
 
-        ValidateTrackedObjects();
+        InitTrackedObjects();
     }
 
     void OnDestroy() {
@@ -108,19 +108,26 @@ public class RadarDisplay : MonoBehaviour
     }
 
     void RefreshDisplay() {
+        // List<RadarTrackedObj> toRemove = new List<RadarTrackedObj>(); //Todo after running trackedObj.Validate(), if obj.isDestroyed, add it to a toRemove list, then remove from trackedObjectsById after loop; Also, could probably still remove in place by using for loop.
         foreach(RadarTrackedObj trackedObj in trackedObjectsById.Values) {
-            if(!trackedObj.GetIsActive()) {continue;}
             UpdateBlip(trackedObj);
         }
         lastRefreshTime = Time.time;
     }
 
     void UpdateBlip(RadarTrackedObj trackedObj) {
+        trackedObj.Validate();
+        if(trackedObj.isDestroyed||!trackedObj.GetIsActive()) {return;}
         // Set Position
         trackedObj.blip.position = GetBlipPosition(trackedObj);
         // Set Scale
         trackedObj.blip.localScale = GetBlipScale(trackedObj);
     }
+
+    void UpdateBlipMaterial() {
+        //TODO: When vertical angle between trackedObj and player is less than some value (e.g. 5 degrees) (i.e. is level with the horizon field), increase brightness on the obj; this should help make it clear when you're on the same plane
+    }
+
 
     Vector3 GetBlipScale(RadarTrackedObj trackedObj) {
          //TODO: Implement a base scale (scale multiplier? on RadarTrackedObj) to maintain a representation of relative scale while still scaling based on distance
@@ -140,7 +147,7 @@ public class RadarDisplay : MonoBehaviour
         return radarDisplay.position+dir*distanceFromCenterOfDisplay;
     }
 
-    void ValidateTrackedObjects() {
+    void InitTrackedObjects() {
         //use sphereoverlap to find all objects (without relying on trigger); 
         //TODO: Compare to trackedObjects list and update as needed; Add missing, remove stales.
         Collider[] found = Physics.OverlapSphere(radar.position, radarRadius);
@@ -178,13 +185,23 @@ public class RadarTrackedObj {
     public int colliderId;
     public Transform obj;
     public Transform blip;
+    public bool isDestroyed;
     private bool isActive = true;
+
 
     public RadarTrackedObj(Transform obj, Transform blip) {
         this.obj = obj;
         this.blip = blip;
         this.rootId = obj.root.GetInstanceID();
         this.colliderId = obj.GetInstanceID(); //TODO: May want to utilize root instance ID for tracking
+
+        // OnDestroyHandler onDestroyHandler = this.obj.AddComponent<OnDestroyHandler>();
+        // onDestroyHandler.onDestroy += CleanupSelf;
+    }
+
+    ~RadarTrackedObj() {
+        Debug.Log(obj.name+ "_TrackedObj.Deconstructor()");
+        CleanupSelf();
     }
 
     public bool GetIsActive() => this.isActive;
@@ -192,6 +209,19 @@ public class RadarTrackedObj {
     public void SetIsActive(bool newValue) {
         this.isActive = newValue;
         this.blip.gameObject.SetActive(newValue);
+    }
+
+    public void Validate(){
+        if(isDestroyed) return; // Return if already destroyed and cleanedup
+        if(this.obj==null) {
+            CleanupSelf();
+        }
+    }
+
+    void CleanupSelf() {
+        GameObject.Destroy(this.blip.gameObject);
+        this.obj = null;
+        isDestroyed = true;
     }
 }
 
