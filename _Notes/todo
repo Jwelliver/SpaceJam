@@ -25,6 +25,7 @@
   - [x] Add MissleTrackable script to objects that can be homed on by missle
   - [x] When missle in another, smaller range, add explosion force.. apply damage based on distance.
     - [] Add Projectile class to handle speed
+  - [] Try using trail particle for exhaust particle to see if that has better results
 
   - [] Add ExplosionFX to missile
 
@@ -62,9 +63,6 @@
 - [] Fix ShipThrust sound fx to gradually increase pitcch
   - *May not be necessary if using a continuous input
 
-
-- [] Set asteroid explosion particle to asteroid mesh
-
 - [] Add smoke impact between laser and asteroid.
   - [] set fx scale depenndent on laser charge
 
@@ -81,3 +79,46 @@
   - ! [x] Bug: Occasionally got a transform null ref when testing; 
 
 - [] Don't show damage UI until it's greater than zero.
+
+
+- [] extract radar code from radar display
+  - [] ? consider replacing missle trackable w/ radar logic
+
+
+- [] Bugs:
+  - [] in scripts that spawn other objs on destroy, and check if app is quitting, make sure to also check if app is restarting.
+
+- [] Create ShipComponentRef script to act as general reference point for inter-ship component references (e.g. ShipWeapons, ShipEnergy, Rb, etc.)
+
+- [] Setup and implement WeaponGroup class for use in ShipWeapons.
+
+- [] ShipController > Set Fire methods to set flags and then be called in FixedUpdate.
+  - [] Might be good to switch PlayerInput Behvaior to events, and we can tracked "pressed" using pressed this frame and released.
+
+
+  ===
+SplitScreen Wrapup
+
+- [] Pass 1: Fix exisiting mechanics
+  - [x] Fix Explosion force
+  - [] Missle needs to fire from gun
+    - [x] Move missile launch code from ShipController and implement using new weapon/projectile system
+    - [x] ? add projectile script to missile prefab 
+        | Made missle inherit projectile.
+    - [x] Need to instantiate missile properly w/ owner id.
+    - [] Needs full test - Still colliding w/ship and not sure it's detonating properly; May be due to using protected from base class rather than virtual override.
+    - [] Later: Return to todos in: Weapon, Projectile, AmmoRef, and PrefabPool
+  - [] set playerspawn locations 
+  - [] Enable Respawn (full player life cycle)
+
+
+- [] Setup Start screen
+  - [] Setup colors on player data class and allow player to change colors for various ship components and lasers
+
+- [] Polish
+  - [] Fix Radar color-setting; Use RadarTrackable and a scriptableObj ref
+  - [] Set asteroid explosion particle to asteroid mesh
+  - [] Add impact smoke
+  - [] add explosion fx 
+  - [] Add ship thrust fx
+  
