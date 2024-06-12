@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8316356058898061185}
   - component: {fileID: 2679531157610658858}
   - component: {fileID: 2531174460750509944}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 9096355685185653753}
   - component: {fileID: 1643085569819371597}
   - component: {fileID: 6303456469437087254}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PropulsionFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5106,7 +5106,7 @@ GameObject:
   - component: {fileID: 3015005104532289068}
   - component: {fileID: 8421866819981483750}
   - component: {fileID: 7239946737482656775}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Missle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5122,7 +5122,7 @@ Transform:
   m_GameObject: {fileID: 7849910194647047190}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.479, y: 1.45, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5170,16 +5170,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfe4d0846c65f0d4d89c66487aa27f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammoType: 1
+  sourceWeapon: {fileID: 0}
   trackingTrigger: {fileID: 1646456568461169450}
-  speed: 50
   turnRate: 90
   trackingRange: 50
   detonateRange: 5
   damageRange: 0
   explosiveForce: 1000
-  lifeTime: 30
   armDelay: 0.7
-  owner: {fileID: 0}
+  ownerId: 0
   detonation: {fileID: 8300000, guid: 5870b62afd78994449adbf1221bbd9c7, type: 3}
 --- !u!1 &8652372200428506339
 GameObject:
@@ -5191,7 +5191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 827990774462045583}
   - component: {fileID: 1646456568461169450}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TrackingSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

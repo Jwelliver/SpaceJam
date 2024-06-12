@@ -3,67 +3,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum WeaponGroupFireMode {
+    ALTERNATING
+}
+// TODO Setup and implement weapon group class
 public class ShipWeapons : MonoBehaviour
 {
-    public Transform leftGun;
-    public Transform rightGun;
-    // public Transform projectilePrefab;
-    public PrefabPool prefabPool;
+    [Header("Gun Transforms")]
+    public Weapon primary_L;
+    public Weapon primary_R;
+    public WeaponGroupFireMode primaryWeaponGroupFireMode;
+    public Weapon secondary;
     public ShipController shipController;
-    public AudioClip projectileSound;
-    public float projectileSpeed = 500;
-    public float fireRate;
-    private float lastFireTime = 0;
-    private Transform activeWeapon;
-    private bool wasLastFireLeft;
-    private AudioSource rightGunAudioSource;
-    private AudioSource leftGunAudioSource;
+    public float primaryFireRate;
+    private float primaryLastFireTime = 0;
 
+    public void FirePrimary() {
+        //!Don't delete this commented block; Just removing until we have other FireModes implemented
+        // switch(primaryWeaponGroupFireMode) { //TODO: to Avoid switch statement on every fire, assign to delegate whenever mode is switched, then call delegate from here.
+        //     case WeaponGroupFireMode.ALTERNATING: {
+        //         FirePrimaryAlternating(); //TODO: If you make weapons groups, pass them in to an Alternating method (agnostic to group)
+        //         break;
+        //     }
+        // } 
+        FirePrimaryAlternating(); //*Skipping firemodes for now since we don't have em
+    }
 
-    void Start()
+    void FirePrimaryAlternating()
     {
-        leftGunAudioSource = leftGun.GetComponent<AudioSource>();
-        rightGunAudioSource = rightGun.GetComponent<AudioSource>();
-        // prefabPool.OnReturnToPool = ResetProjectile;
-        prefabPool.OnInstantiate = InitProjectile;
-        // prefabPool.OnGet = OnGetProjectile;
+        float curTime = Time.time;
+        if (curTime - primaryLastFireTime < primaryFireRate) return;
+        bool wasLastFireLeft = curTime-primary_L.GetLastFireTime() < curTime-primary_R.GetLastFireTime();
+        (wasLastFireLeft ? primary_R : primary_L).Fire(); // chose primary weapon based on lastFire
+        primaryLastFireTime = curTime;
     }
 
-    public void TryFireWeapon()
-    {
-        if (Time.time - lastFireTime > fireRate)
-        {
-            FireWeapon();
-        }
+    public void FireSecondary() {
+        secondary.Fire();
     }
-
-    void InitProjectile(Transform projectileTransform)
-    { //* This is run by the prefabPool when instantiating a new projectile
-        projectileTransform.GetComponent<Projectile>().OnDisableAction = prefabPool.ReturnToPool;
-    }
-    // void ResetProjectile(Transform projectileTransform)
-    // {
-    //     projectileTransform.GetComponent<Rigidbody>().velocity = Vector3.zero;
-    //     projectileTransform.rotation = Quaternion.identity;
-    // }
-
-    void FireWeapon()
-    {
-        activeWeapon = wasLastFireLeft ? rightGun : leftGun;
-        AudioSource audioSource = wasLastFireLeft ? rightGunAudioSource : leftGunAudioSource;
-        // audioSource.Stop();
-        try
-        {
-            prefabPool.Get().GetComponent<Projectile>().OnFire(shipController.shipRb.velocity, activeWeapon);
-            audioSource.PlayOneShot(projectileSound);
-            wasLastFireLeft = !wasLastFireLeft;
-            lastFireTime = Time.time;
-            shipController.shipEnergy.OnWeaponFired();
-        }
-        catch (Exception e)
-        {
-            Debug.Log("Could Not fire." + e);
-        }
-    }
-
 }

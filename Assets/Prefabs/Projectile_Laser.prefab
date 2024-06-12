@@ -138,8 +138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c07a6e30d0e1f948ab0c06eef521074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileType: 0
-  speed: 500
+  ammoType: 0
+  sourceWeapon: {fileID: 0}
 --- !u!135 &4399443337310232857
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -160,7 +160,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.2
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 1}
 --- !u!114 &5075901101660221310
 MonoBehaviour:
   m_ObjectHideFlags: 0

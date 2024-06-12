@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e53549d6759ff3e4484c39a9b89ef0e1, type: 3}
+  m_Name: AmmoRef
+  m_EditorClassIdentifier: 
+  ammoData:
+  - ammoType: 0
+    name: Laser
+    speed: 100
+    fireRate: 0
+    energyCost: 8
+    returnToPoolAfterTime: 3
+    hasPropulsion: 0
+    prefab: {fileID: 9047525068044279362, guid: 13ee8100c6d5ceb45812de6a349646c2, type: 3}
+    fireSound: {fileID: 8300000, guid: e2ed3d6ad6f3c88428f0d98fcb695690, type: 3}
+  - ammoType: 1
+    name: Missle
+    speed: 50
+    fireRate: 1
+    energyCost: 0
+    returnToPoolAfterTime: 20
+    hasPropulsion: 1
+    prefab: {fileID: 3015005104532289068, guid: 4bc04cc3ac802aa4d905d589c7d2e7c7, type: 3}
+    fireSound: {fileID: 8300000, guid: 62b907e7386f74d44a7c00c0f5d390b4, type: 3}

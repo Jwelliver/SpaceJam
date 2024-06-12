@@ -22,7 +22,6 @@ public class ShipController : MonoBehaviour
     public Camera mainCam;
     public ShipEnergy shipEnergy;
     public ShipWeapons shipWeapons;
-    public Transform misslePrefab; //! Temp for testing; Move to weapons
     public Rigidbody shipRb;
     public AudioSource engineAudio1;
     public AudioSource engineAudio2;
@@ -31,6 +30,7 @@ public class ShipController : MonoBehaviour
     float rollInput;
     float yawInput;
     float thrustInput;
+    // bool isFiring
     bool isFreeFlightEnabled;
     Vector3 prevAngularVelocity = new Vector3(0, 0, 0);
 
@@ -39,7 +39,7 @@ public class ShipController : MonoBehaviour
         
         if (playerInput.actions["FirePrimary"].IsPressed())
         {
-            if(shipEnergy.CanFireWeapon()) shipWeapons.TryFireWeapon();
+            shipWeapons.FirePrimary();
         }
     }
 
@@ -48,9 +48,9 @@ public class ShipController : MonoBehaviour
     void OnYaw(InputValue v) => yawInput = v.Get<float>();
     void OnThrust(InputValue v) => thrustInput = v.Get<float>();
     void OnToggleFreeFlight() => isFreeFlightEnabled = !isFreeFlightEnabled;
-    void OnFireSecondary() { // //TODO: TEMP Create missle; Add missle count and regen
-        FireMissle();
-    }
+
+    // void OnFirePrimary() => shipWeapons.FirePrimary();
+    void OnFireSecondary() => shipWeapons.FireSecondary();
 
     void OnApplicationQuit()
     {
@@ -75,7 +75,12 @@ public class ShipController : MonoBehaviour
     void FixedUpdate()
     {
         HandleShipMovement();
+        // HandleWeapons();
     }
+
+    // void HandleWeapons() {
+
+    // }
 
 
     void HandleShipMovement()
@@ -194,14 +199,5 @@ public class ShipController : MonoBehaviour
         engineAudio1.pitch = newPitch1;
         engineAudio2.pitch = newPitch2;
     }
-
-    void FireMissle()
-    {
-        Transform newMissle = Instantiate(misslePrefab, transform.position - new Vector3(0, 2, 1), transform.rotation);
-        Missile m = newMissle.GetComponent<Missile>();
-        m.ownerId = transform.root.GetInstanceID();
-        newMissle.GetComponent<Rigidbody>().velocity = shipRb.velocity;
-    }
-
 }
 

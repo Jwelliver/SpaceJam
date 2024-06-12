@@ -8,7 +8,6 @@ public class ShipEnergy : MonoBehaviour
     public float maxEnergy;
     public float currentEnergy;
     public float regenRate;
-    public float weaponDrainAmount;
     public float thrustDrainRate;
     public float maneuverDrainRate;
 
@@ -21,13 +20,12 @@ public class ShipEnergy : MonoBehaviour
     {
         if (currentEnergy < maxEnergy)
         {
-            currentEnergy += regenRate * Time.deltaTime;
+            AddEnergy(regenRate*Time.deltaTime);
         }
     }
 
-    public bool CanFireWeapon()
-    {
-        return currentEnergy > weaponDrainAmount;
+    public bool CheckEnergy(float hasAmount) {
+        return currentEnergy>=hasAmount;
     }
 
     public bool CanThrust()
@@ -40,26 +38,29 @@ public class ShipEnergy : MonoBehaviour
         return currentEnergy > 10;
     }
 
-    public void OnWeaponFired()
-    {
-        ExpendEnergy(weaponDrainAmount);
-    }
-
     public void OnManeuver(float amt)
     {
-        ExpendEnergy(amt * maneuverDrainRate * Time.deltaTime);
+        ConsumeEnergy(amt * maneuverDrainRate * Time.deltaTime);
     }
 
     public void OnThrust(float amt)
     {
-        ExpendEnergy(amt * thrustDrainRate * Time.deltaTime);
+        ConsumeEnergy(amt * thrustDrainRate * Time.deltaTime);
     }
 
-    void ExpendEnergy(float amt)
-    {
-        if (currentEnergy - amt < 0) { currentEnergy = 0; return; }
-        currentEnergy -= amt;
+    public void AddEnergy(float amt) {
+        if(amt<0) {throw new System.Exception("Cannot Add negative energy");}
+        AdjustEnergy(amt);
+    }
 
+    public void ConsumeEnergy(float amt)
+    {
+        if(amt<0) {throw new System.Exception("Cannot consume negative energy");}
+        AdjustEnergy(-amt);
+    }
+
+    public void AdjustEnergy(float amount) {
+        currentEnergy = Mathf.Clamp(currentEnergy+amount, 0, maxEnergy);
     }
 
 }
