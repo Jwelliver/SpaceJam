@@ -657,7 +657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 2446547586297379932, guid: e1f579f35296aa14a919d3b8af7100ec, type: 3}
   poolContainer: {fileID: 0}
-  initOnAwake: 1
+  initOnStart: 1
   initAmount: 10
   maxAmount: 1000
   secondsBeforeReturnToPool: 6
