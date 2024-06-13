@@ -2,7 +2,7 @@
     "name": "SpaceJam",
     "maps": [
         {
-            "name": "Player",
+            "name": "ShipControls",
             "id": "d2df7913-a73a-4c03-9a17-fba59aa72667",
             "actions": [
                 {
@@ -72,6 +72,15 @@
                     "name": "JoinGame",
                     "type": "Button",
                     "id": "b0ecdf90-419e-4100-a27c-4efe7e5bb91e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpawnShip",
+                    "type": "Button",
+                    "id": "5272a37a-ddc2-4e15-916c-39593e805110",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold",
@@ -186,6 +195,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "JoinGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a492f2cb-7ef0-4ae1-ab63-9ea261a2702e",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SpawnShip",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
