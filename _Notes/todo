@@ -96,6 +96,13 @@
   - [] Might be good to switch PlayerInput Behvaior to events, and we can tracked "pressed" using pressed this frame and released.
 
 
+- [] Radar Controls
+  - [] try using directional keys up/down to increase/decrease radar range;
+  - [] Consider using a "dogfight mode" that adaptively expands to include the nearest or targeted enemy; It should highlight them and decrease visibility or remove other objects
+    | this might also add a trail to the radar; and possibly also show a detailed blip (mini ship) and track rotation;
+    
+- [] ?  Cockpit interaction control scheme: Use select to toggle between selected components/menus, and directional arrows to interact/change values
+
   ===
 SplitScreen Wrapup
 
@@ -108,8 +115,13 @@ SplitScreen Wrapup
     - [x] Need to instantiate missile properly w/ owner id.
     - [] Needs full test - Still colliding w/ship and not sure it's detonating properly; May be due to using protected from base class rather than virtual override.
     - [] Later: Return to todos in: Weapon, Projectile, AmmoRef, and PrefabPool
-  - [] set playerspawn locations 
-  - [] Enable Respawn (full player life cycle)
+
+  - [] Setup Player manager
+    - [] set playerspawn locations 
+    - [] Enable Respawn (full player life cycle)
+      - [] Decouple PlayerInput from ship controller
+        - [] Move PlayerInput to Player prefab; Switch behavior to events; Rewrite event handlers in ShipController
+        - [] Add AssignPlayerInput method to ShipController which subscribes the events and sets the playerInput field;  PlayerManager calls this when spawning a new ship.
 
 
 - [] Setup Start screen
@@ -120,5 +132,6 @@ SplitScreen Wrapup
   - [] Set asteroid explosion particle to asteroid mesh
   - [] Add impact smoke
   - [] add explosion fx 
-  - [] Add ship thrust fx
+  - [x] Add ship thrust fx
+  - [] Try using trail renderer on laser and missile
   
