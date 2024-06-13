@@ -200,6 +200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 575591524}
+  - component: {fileID: 575591526}
   - component: {fileID: 575591525}
   m_Layer: 0
   m_Name: PlayerManagers
@@ -267,6 +268,18 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &575591526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575591523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e3a9180a01b7048bcb0903674ed4a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,6 +623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 101cf80478d54ac49b8c5260d8b924cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerInputManager: {fileID: 575591525}
   _ammoRef: {fileID: 11400000, guid: 8d4b3e65cbd28674d88c902d7d3d9350, type: 2}
 --- !u!1 &1802362026
 GameObject:
