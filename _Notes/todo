@@ -117,11 +117,12 @@ SplitScreen Wrapup
     - [] Later: Return to todos in: Weapon, Projectile, AmmoRef, and PrefabPool
 
   - [] Setup Player manager
-    - [] set playerspawn locations 
-    - [] Enable Respawn (full player life cycle)
-      - [] Decouple PlayerInput from ship controller
-        - [] Move PlayerInput to Player prefab; Switch behavior to events; Rewrite event handlers in ShipController
-        - [] Add AssignPlayerInput method to ShipController which subscribes the events and sets the playerInput field;  PlayerManager calls this when spawning a new ship.
+    - [x] set playerspawn locations 
+    - [x] Enable Respawn (full player life cycle)
+      - [x] Decouple PlayerInput from ship controller
+        - [x] Move PlayerInput to Player prefab; Switch behavior to events; Rewrite event handlers in ShipController
+        - [x] Add AssignPlayerInput method to ShipController which subscribes the events and sets the playerInput field;  PlayerManager calls this when spawning a new ship.
+          - [x] Setup ShipInterface component and refactor all ship components to reference that
 
 
 - [] Setup Start screen
