@@ -11,11 +11,11 @@ public enum WeaponGroupFireMode {
 public class ShipWeapons : MonoBehaviour
 {
     [Header("Gun Transforms")]
+    public ShipInterface shipInterface;
     public Weapon primary_L;
     public Weapon primary_R;
     public WeaponGroupFireMode primaryWeaponGroupFireMode;
     public Weapon secondary;
-    public ShipController shipController;
     public float primaryFireRate;
     private float primaryLastFireTime = 0;
 

@@ -9,7 +9,7 @@ public enum WeaponType {
 
 public class Weapon : MonoBehaviour
 {
-    public ShipController shipController; //TODO: Set privately
+    public ShipInterface shipInterface; //TODO: Set privately
     public WeaponType weaponType;
     public AmmoType ammoType;
     public Vector3 ammoPlacementOffset;
@@ -19,11 +19,16 @@ public class Weapon : MonoBehaviour
     private float _lastFireTime;
 
     void Awake() {
+        shipInterface = GetComponentInParent<ShipInterface>();
         ammoPool = GetComponentInChildren<PrefabPool>(); // TODO: Set this up so ammoTypes can be changed and we use a different pool.
         audioSource = GetComponent<AudioSource>();
         //TODO: Setup methods for prefab pool before initing; (unless you build projectilepool)
         ammoPool.OnInstantiate+=InitProjectile;
         ammoPool.OnGet+=OnGetProjectile;
+        // OnAmmoTypeChanged();
+    }
+
+    void Start() {
         OnAmmoTypeChanged();
     }
 
@@ -53,10 +58,10 @@ public class Weapon : MonoBehaviour
 
     public void Fire() {
         float curTime = Time.time;
-        if(curTime - _lastFireTime <ammoData.fireRate || !shipController.shipEnergy.CheckEnergy(ammoData.energyCost)) {return;}
+        if(curTime - _lastFireTime <ammoData.fireRate || !shipInterface.shipEnergy.CheckEnergy(ammoData.energyCost)) {return;}
         ammoPool.Get().GetComponent<Projectile>().OnFire(); //!Remove need to getComponent; See notes about ComponentPools
         audioSource.Play();
-        shipController.shipEnergy.ConsumeEnergy(ammoData.energyCost);
+        shipInterface.shipEnergy.ConsumeEnergy(ammoData.energyCost);
         _lastFireTime = curTime;
     }
 

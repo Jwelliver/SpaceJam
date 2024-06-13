@@ -6,20 +6,27 @@ using TMPro;
 public class CockpitUI : MonoBehaviour
 {
 
-    public TMPro.TextMeshProUGUI speedTextMesh;
-    public TMPro.TextMeshProUGUI energyTextMesh;
-    public TMPro.TextMeshProUGUI damagePctTextMesh;
-    public ShipController shipController;
-    public Damageable damageable;
-    public ShipEnergy shipEnergy;
-    public Light warningLight;
-    public Color goodColor = Color.green;
-    public Color badColor = Color.red;
-    public AudioSource warningAudioSource;
+    public ShipInterface shipInterface;
+    [SerializeField] TMPro.TextMeshProUGUI speedTextMesh;
+    [SerializeField] TMPro.TextMeshProUGUI energyTextMesh;
+    [SerializeField] TMPro.TextMeshProUGUI damagePctTextMesh;
+    [SerializeField] Light warningLight;
+    [SerializeField] Color goodColor = Color.green;
+    [SerializeField] Color badColor = Color.red;
+    [SerializeField] AudioSource warningAudioSource;
 
+    private Damageable shipDamage;
+    private ShipController shipController;
+    private ShipEnergy shipEnergy;
     private bool isWarningLightActive = true;
     private float initialWarningLightIntensity;
     public float warningLightBrightnessRate = 10;
+
+    void Awake() {
+        shipController = shipInterface.shipController;
+        shipEnergy = shipInterface.shipEnergy;
+        shipDamage = shipInterface.shipDamage;
+    }
 
 
     void Start()
@@ -55,7 +62,7 @@ public class CockpitUI : MonoBehaviour
 
     void UpdateDamageUI()
     {
-        float damagePct = damageable.damageTaken / damageable.maxDamage;
+        float damagePct = shipDamage.damageTaken / shipDamage.maxDamage;
         damagePctTextMesh.SetText(Mathf.Round(damagePct * 100) + "%");
         damagePctTextMesh.color = Color.Lerp(goodColor, badColor, damagePct);
     }
@@ -76,7 +83,7 @@ public class CockpitUI : MonoBehaviour
 
     void CheckWarningLight()
     {
-        float damagePct = damageable.damageTaken / damageable.maxDamage;
+        float damagePct = shipDamage.damageTaken / shipDamage.maxDamage;
         float energyPct = shipEnergy.currentEnergy / shipEnergy.maxEnergy;
         bool warningLightShouldBeActive = (damagePct >= 0.9f) || energyPct < 0.1f;
 

@@ -1,13 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class ShipController : MonoBehaviour
 
 {
-
+    //TODO: Rename to ShipInputHandler; Extract movement, "Engine Audio", and camera handling;
     // Public variables to tweak spaceship controls behavior
 
     [Header("Ship Controls")]
@@ -18,57 +15,40 @@ public class ShipController : MonoBehaviour
     public float yawSpeed = 2f;
     public float maxSpeed = 20f;
     public float dampingRate = 0.1f;
-    public PlayerInput playerInput;
-    public Camera mainCam;
-    public ShipEnergy shipEnergy;
-    public ShipWeapons shipWeapons;
-    public Rigidbody shipRb;
+    public ShipInterface shipInterface;
     public AudioSource engineAudio1;
     public AudioSource engineAudio2;
-    private bool isQuitting;
-    float pitchInput;
-    float rollInput;
-    float yawInput;
-    float thrustInput;
+    private ShipEnergy shipEnergy;
+    private ShipWeapons shipWeapons;
+    private Rigidbody rb;
+    public float pitchInput;
+    public float rollInput;
+    public float yawInput;
+    public float thrustInput;
     // bool isFiring
-    bool isFreeFlightEnabled;
+    public bool isFreeFlightEnabled;
     Vector3 prevAngularVelocity = new Vector3(0, 0, 0);
 
-    void Update()
-    {
-        
-        if (playerInput.actions["FirePrimary"].IsPressed())
-        {
-            shipWeapons.FirePrimary();
-        }
+    void Awake() {
+        shipEnergy = shipInterface.shipEnergy;
+        shipWeapons = shipInterface.shipWeapons;
+        rb = shipInterface.rb;
     }
 
-    void OnRoll(InputValue v) => rollInput = v.Get<float>();
-    void OnPitch(InputValue v) => pitchInput = v.Get<float>();
-    void OnYaw(InputValue v) => yawInput = v.Get<float>();
-    void OnThrust(InputValue v) => thrustInput = v.Get<float>();
-    void OnToggleFreeFlight() => isFreeFlightEnabled = !isFreeFlightEnabled;
 
-    // void OnFirePrimary() => shipWeapons.FirePrimary();
-    void OnFireSecondary() => shipWeapons.FireSecondary();
+    public void OnRoll(float v) => rollInput = v;
+    public void OnPitch(float v) => pitchInput = v;
+    public void OnYaw(float v) => yawInput = v;
+    public void OnThrust(float v) => thrustInput = v;
+    public void OnToggleFreeFlight() => isFreeFlightEnabled = !isFreeFlightEnabled;
+    public void OnFirePrimary() => shipWeapons.FirePrimary();
+    public void OnFireSecondary() => shipWeapons.FireSecondary();
 
-    void OnApplicationQuit()
-    {
-        isQuitting = true;
-    }
-
-    void OnDestroy()
-    {
-        if (!isQuitting)
-        {
-            mainCam.transform.parent = null;
-        }
-    }
 
     public float GetSpeed()
     {
         Vector3 forwardDirection = transform.forward;
-        return Mathf.Floor(Vector3.Dot(forwardDirection, shipRb.velocity));
+        return Mathf.Floor(Vector3.Dot(forwardDirection, rb.velocity));
     }
 
 
@@ -92,7 +72,7 @@ public class ShipController : MonoBehaviour
             Vector3 thrustForce = transform.forward * thrustInput * thrustPower;
             if (GetSpeed() < maxSpeed)
             {
-                shipRb.AddForce(thrustForce);
+                rb.AddForce(thrustForce);
                 float amt = Mathf.Abs(thrustForce.magnitude);
                 if (amt > 0)
                 {
@@ -109,7 +89,7 @@ public class ShipController : MonoBehaviour
             float roll = rollInput * rollSpeed * Time.fixedDeltaTime;
             float yaw = yawInput * yawSpeed * Time.fixedDeltaTime;
             Quaternion rotation = Quaternion.Euler(pitch, yaw, -roll);
-            shipRb.MoveRotation(shipRb.rotation * rotation);
+            rb.MoveRotation(rb.rotation * rotation);
 
             prevAngularVelocity.x = pitch;
             prevAngularVelocity.y = yaw;
@@ -123,7 +103,7 @@ public class ShipController : MonoBehaviour
         }
         else
         {
-            shipRb.MoveRotation(shipRb.rotation * Quaternion.Euler(prevAngularVelocity));
+            rb.MoveRotation(rb.rotation * Quaternion.Euler(prevAngularVelocity));
         }
     }
 
@@ -139,28 +119,28 @@ public class ShipController : MonoBehaviour
         Vector3 forwardDirection = transform.forward;
 
         // Project the current velocity onto the forward direction
-        Vector3 forwardVelocity = Vector3.Project(shipRb.velocity, forwardDirection);
+        Vector3 forwardVelocity = Vector3.Project(rb.velocity, forwardDirection);
 
         // Calculate the sideways velocity (velocity that is not in the forward direction)
-        Vector3 sidewaysVelocity = shipRb.velocity - forwardVelocity;
+        Vector3 sidewaysVelocity = rb.velocity - forwardVelocity;
 
         // Gradually reduce the sideways velocity by applying a damping factor
         Vector3 newSidewaysVelocity = Vector3.Lerp(sidewaysVelocity, Vector3.zero, dampingRate * Time.fixedDeltaTime);
 
         // The new velocity is the forward velocity plus the dampened sideways velocity
-        shipRb.velocity = forwardVelocity + newSidewaysVelocity;
+        rb.velocity = forwardVelocity + newSidewaysVelocity;
     }
 
     void ApplyAngularDamping()
     {
         // Get current angular velocity
-        Vector3 currentAngularVelocity = shipRb.angularVelocity;
+        Vector3 currentAngularVelocity = rb.angularVelocity;
 
         // Gradually reduce the angular velocity by applying a damping factor
         Vector3 newAngularVelocity = Vector3.Lerp(currentAngularVelocity, Vector3.zero, dampingRate * Time.fixedDeltaTime);
 
         // Assign the dampened angular velocity back to the rigidbody
-        shipRb.angularVelocity = newAngularVelocity;
+        rb.angularVelocity = newAngularVelocity;
     }
 
     void HandleEngineAudio()

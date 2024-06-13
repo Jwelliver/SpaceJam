@@ -33,7 +33,7 @@ public class Projectile : MonoBehaviour
     public void OnFire()
     {
         timeFired = Time.time;
-        inheritedVelocity = sourceWeapon.shipController.shipRb.velocity;
+        inheritedVelocity = sourceWeapon.shipInterface.rb.velocity;
         rb.velocity = inheritedVelocity + (transform.forward * ammoData.speed);
     }
 
