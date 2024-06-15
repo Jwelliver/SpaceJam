@@ -14,6 +14,8 @@ public class TakeDamageOnCollision : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        // Vector3 collisionForce = collision.impulse /Time.fixedDeltaTime;
+        // float collisionStrength = collisionForce.magnitude;
         float overrideAmt = CollisionDamageOverride.CheckDamageOverrideByTag(collision.transform.tag);
         ImpactFX.CreateImpact(transform, collision);
         float damage = overrideAmt > -1 ? overrideAmt : collision.impulse.magnitude * damageMultiplier;

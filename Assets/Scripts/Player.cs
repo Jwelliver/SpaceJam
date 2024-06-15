@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class Player : MonoBehaviour
     public Camera cam;
     public PlayerShipInputHandler playerShipInputHandler;
     public PlayerData playerData;
+    public PlayerInput playerInput;
 
 
     // ACTIONS
@@ -22,6 +24,9 @@ public class Player : MonoBehaviour
     }
 
     public void DespawnShip() {
+        //Try to stop potentially runaway haptics
+        try{playerInput.GetDevice<Gamepad>().SetMotorSpeeds(0,0);} catch{}
+        
         cam.transform.parent =  transform;
         OnShipDespawned?.Invoke();
         shipInterface = null;

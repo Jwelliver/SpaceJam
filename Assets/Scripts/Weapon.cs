@@ -16,6 +16,12 @@ public class Weapon : MonoBehaviour
     private AmmoDataEntry ammoData;
     private AudioSource audioSource;
     public PrefabPool ammoPool; //TODO: Setup to be AmmoPool or ProjectilePool - anything so we can avoid calling getComponent on fire.
+
+    ShipHaptics _shipHaptics;
+    ShipHaptics shipHaptics {
+        get { if(_shipHaptics ==null) { _shipHaptics=shipInterface.shipHaptics; } return _shipHaptics; }
+        set { _shipHaptics=value; }
+    }
     private float _lastFireTime;
 
     void Awake() {
@@ -62,6 +68,7 @@ public class Weapon : MonoBehaviour
         if(curTime - _lastFireTime <ammoData.fireRate || !shipInterface.shipEnergy.CheckEnergy(ammoData.energyCost)) {return;}
         ammoPool.Get().GetComponent<Projectile>().OnFire(); //!Remove need to getComponent; See notes about ComponentPools
         audioSource.Play();
+        shipHaptics.Play_FireWeapon(ammoType);
         shipInterface.shipEnergy.ConsumeEnergy(ammoData.energyCost);
         _lastFireTime = curTime;
     }

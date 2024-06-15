@@ -459,6 +459,7 @@ MonoBehaviour:
   shipPrefab: {fileID: 5564332221294027920, guid: 089ba805159853b49b954015fbced5d8, type: 3}
   cam: {fileID: 8450566222643068241}
   playerShipInputHandler: {fileID: 7199287313593623604}
+  playerInput: {fileID: 6568593461075755331}
 --- !u!1 &3342147348927095056
 GameObject:
   m_ObjectHideFlags: 0

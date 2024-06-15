@@ -8,6 +8,7 @@ public class ShipInterface : MonoBehaviour
     public ShipController shipController;
     public ShipEnergy shipEnergy;
     public ShipWeapons shipWeapons;
+    public ShipHaptics shipHaptics;
     public Damageable shipDamage;
     public ShipCustomizer shipCustomizer;
     public Transform cameraParent;
