@@ -3609,6 +3609,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2069224595077552354}
     - target: {fileID: 6162316682695587355, guid: e24b5d454ef63494791d0fe3730d4c52, type: 3}
+      propertyPath: ammoPlacementOffset.y
+      value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6162316682695587355, guid: e24b5d454ef63494791d0fe3730d4c52, type: 3}
       propertyPath: ammoPlacementOffset.z
       value: 1
       objectReference: {fileID: 0}
