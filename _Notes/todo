@@ -139,11 +139,14 @@ SplitScreen Wrapup
   - [] Fix Radar color-setting; Use RadarTrackable and a scriptableObj ref
   - [] Set asteroid explosion particle to asteroid mesh
   - [] Add impact smoke
-  - [] add explosion fx 
+  - [] add explosion fx s
   - [x] Add ship thrust fx
-  - [] Try using trail renderer on laser and missile
+  - [x] Try using trail renderer on laser and missile
   - [] Re-Add Cockpit camera movement
   - [] CockpitDisplay
     - [] Make progress bars to replace jittering text
     - [] Add FlightAssist indicator
+
+- [] Other Fixes
+  - [] Make sure environment isn't generated until after player joined
   
