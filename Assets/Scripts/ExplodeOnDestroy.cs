@@ -26,7 +26,7 @@ public class ExplodeOnDestroy : MonoBehaviour
         isQuitting = true;
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         if (!isQuitting)
         {
