@@ -28,7 +28,7 @@ public class ShipHaptics : MonoBehaviour
     
     PlayerInput _playerInput;
     PlayerInput playerInput {
-        get { if(_playerInput ==null) { _playerInput=shipInterface.GetAssignedPlayer()?.playerInput; } return _playerInput; }
+        get { if(_playerInput ==null) { _playerInput=shipInterface?.GetAssignedPlayer()?.playerInput; } return _playerInput; }
         // set { _playerInput=value; }
     }
 
@@ -139,9 +139,6 @@ public class ShipHaptics : MonoBehaviour
     void OnDisable() {
         StopAllCoroutines();
         gamepad.SetMotorSpeeds(0,0);
-        try {
-            
-        } catch{}
     }
 
 
@@ -150,13 +147,8 @@ public class ShipHaptics : MonoBehaviour
         try{
             gamepad.SetMotorSpeeds(0,0);
         } catch {
-            
+
         }
         
     }
-
-
-
-
-
 }
