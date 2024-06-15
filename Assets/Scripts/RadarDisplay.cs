@@ -58,7 +58,7 @@ public class RadarDisplay : MonoBehaviour
         InitTrackedObjects();
     }
 
-    void OnDestroy() {
+    void OnDisable() {
         //Unsub from trigger handler events
         radarTriggerHandler.OnEnter-=OnRadarEnter;
         radarTriggerHandler.OnExit-=OnRadarExit;

@@ -40,6 +40,7 @@ public class Weapon : MonoBehaviour
     void InitProjectile(Transform _t) { //TODO: Setup in projectile pool
         Projectile p = _t.GetComponent<Projectile>();
         p.sourceWeapon = this;
+        // ShipCustomizationStore.CustomizeProjectile(p);
     }
 
     void OnGetProjectile(Transform _t) {

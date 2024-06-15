@@ -806,6 +806,7 @@ GameObject:
   - component: {fileID: 2498476910654685730}
   - component: {fileID: -1080457491725503773}
   - component: {fileID: 50746621671722549}
+  - component: {fileID: 1015208195478815263}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Ship
@@ -877,6 +878,7 @@ MonoBehaviour:
   shipEnergy: {fileID: 8825525277968439940}
   shipWeapons: {fileID: 2576905408924905750}
   shipDamage: {fileID: 2498476910654685730}
+  shipCustomizer: {fileID: 1015208195478815263}
   cameraParent: {fileID: 8016384543606977057}
 --- !u!114 &52036364084215837
 MonoBehaviour:
@@ -1000,6 +1002,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   signatureStrength: 10
+--- !u!114 &1015208195478815263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2288327730125844953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3101700b6ba02d84689dfc0e7571e489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shipInterface: {fileID: 2069224595077552354}
+  body: {fileID: 2745999461125727585}
+  wing: {fileID: 8110772175582962280}
 --- !u!1 &2524323973512990926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,7 +1027,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3479257180635218470}
   m_Layer: 0
-  m_Name: Body
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1306,7 +1323,7 @@ GameObject:
   - component: {fileID: 2982470497162742960}
   - component: {fileID: 3270561945314373547}
   m_Layer: 0
-  m_Name: Hull
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

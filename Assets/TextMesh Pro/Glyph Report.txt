@@ -1,0 +1,22 @@
+Font: Liberation Sans  Style: Regular
+Point Size: 1   SP/PD Ratio: 6400.0%
+
+Characters included: 240/250
+Missing characters: 0
+Excluded characters: 10
+
+Characters missing from font file:
+----------------------------------------
+
+Characters excluded from packing:
+----------------------------------------
+ID: 8230	Hex: 2026	Char […]
+ID: 8240	Hex: 2030	Char [‰]
+ID: 8242	Hex: 2032	Char [′]
+ID: 8243	Hex: 2033	Char [″]
+ID: 8249	Hex: 2039	Char [‹]
+ID: 8250	Hex: 203A	Char [›]
+ID: 8252	Hex: 203C	Char [‼]
+ID: 8286	Hex: 205E	Char [⁞]
+ID: 8482	Hex: 2122	Char [™]
+ID: 9633	Hex: 25A1	Char [□]

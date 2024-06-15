@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67700629f37d5a44a81fc93d6c852c5, type: 3}
+  m_Name: ShipCustomizationStore
+  m_EditorClassIdentifier: 
+  shipMaterials:
+  - {fileID: 2100000, guid: 8f9ee6e42e2005942a5b092cb9f2087c, type: 2}
+  - {fileID: 2100000, guid: 138dd97cb63790543aebb7ab1036fcb7, type: 2}
+  - {fileID: 2100000, guid: dc60a1e64de33bb44979dad0c2529fa1, type: 2}
+  - {fileID: 2100000, guid: 67acd285733fed44fb1db4a42bd626c4, type: 2}
+  - {fileID: 2100000, guid: 3057f5a2b92dd3b47b45415db850c097, type: 2}
+  - {fileID: 2100000, guid: 508a5c5900b3d654ebf40cf88ed14dbf, type: 2}
+  - {fileID: 2100000, guid: bccd59c329f7a11449e3220748484c14, type: 2}
+  - {fileID: 2100000, guid: 330bedba310e2284aab3841c2cde6780, type: 2}
+  - {fileID: 2100000, guid: ad3f1f7e85cc2e44181aeb349f446cb9, type: 2}
+  - {fileID: 2100000, guid: 248508f42dcd00049925f29941b22e00, type: 2}
+  laserColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.3, b: 0, a: 1}
+  - {r: 1, g: 0.6, b: 0, a: 1}
+  - {r: 1, g: 0.90000004, b: 0, a: 1}
+  - {r: 0.79999995, g: 1, b: 0, a: 1}
+  - {r: 0.5, g: 1, b: 0, a: 1}
+  - {r: 0.19999993, g: 1, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0.099999905, a: 1}
+  - {r: 0, g: 1, b: 0.4000001, a: 1}
+  - {r: 0, g: 1, b: 0.6999998, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 0, g: 0.6999998, b: 1, a: 1}
+  - {r: 0, g: 0.39999986, b: 1, a: 1}
+  - {r: 0, g: 0.10000014, b: 1, a: 1}
+  - {r: 0.19999981, g: 0, b: 1, a: 1}
+  - {r: 0.5, g: 0, b: 1, a: 1}
+  - {r: 0.8000002, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0.8999996, a: 1}
+  - {r: 1, g: 0, b: 0.6000004, a: 1}
+  - {r: 1, g: 0, b: 0.3000002, a: 1}
+  defaultBodyMaterial: {fileID: 2100000, guid: 8f9ee6e42e2005942a5b092cb9f2087c, type: 2}
+  defaultWingMaterial: {fileID: 2100000, guid: 8f9ee6e42e2005942a5b092cb9f2087c, type: 2}
+  defaultWeaponMaterial: {fileID: 2100000, guid: 508a5c5900b3d654ebf40cf88ed14dbf, type: 2}
+  defaultLaserMaterial: {fileID: 2100000, guid: e33442163d869304cad70e49bfdf04f1, type: 2}
+  defaultLaserColor: {r: 1, g: 0, b: 0, a: 1}

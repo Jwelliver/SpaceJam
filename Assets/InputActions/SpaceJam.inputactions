@@ -80,10 +80,19 @@
                 {
                     "name": "SpawnShip",
                     "type": "Button",
-                    "id": "5272a37a-ddc2-4e15-916c-39593e805110",
+                    "id": "02879496-54ae-414f-b42e-3dd24d6b6712",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Navigate",
+                    "type": "PassThrough",
+                    "id": "9a9b8a73-2e20-46d9-aa4b-441f02334155",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -200,12 +209,23 @@
                 },
                 {
                     "name": "",
-                    "id": "a492f2cb-7ef0-4ae1-ab63-9ea261a2702e",
+                    "id": "bd68808f-9ba9-42a5-8b53-e28a9a7aae21",
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "SpawnShip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f6a58fa-bb1f-46c5-bd25-384f464e22a6",
+                    "path": "<Gamepad>/dpad",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

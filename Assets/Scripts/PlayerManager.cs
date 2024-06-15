@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
         playerInputManager.onPlayerLeft += OnPlayerLeave;
     }
 
-    void OnDestroy() {
+    void OnDisable() {
         playerInputManager.onPlayerJoined -= OnPlayerJoin;
         playerInputManager.onPlayerLeft -= OnPlayerLeave;
     }

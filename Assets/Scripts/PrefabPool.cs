@@ -54,6 +54,12 @@ public class PrefabPool : MonoBehaviour
         Init(rebuildPool);
     }
 
+    public void Apply(Action<Transform> func) { //Applies a function to all items in the queue
+        foreach(Transform _t in queue) {
+            func?.Invoke(_t);
+        }
+    }
+
     void Populate(int amount)
     {
         if (queue.Count + amount > maxAmount) return;
