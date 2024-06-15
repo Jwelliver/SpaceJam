@@ -19,7 +19,6 @@ public class ShipSelectScreen : MonoBehaviour
     public PlayerInput playerInput;
     public ShipInterface displayShipInterface;
     public Transform displayLaser;
-    public Canvas shipSelectScreenCanvas;
     public TextMeshProUGUI selectedComponentText;
 
     private ShipCustomizationSettings shipCustomizationSettings;
