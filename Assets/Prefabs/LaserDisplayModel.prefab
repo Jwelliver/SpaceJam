@@ -16,6 +16,22 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
+    - target: {fileID: 4783484313913079275, guid: 13ee8100c6d5ceb45812de6a349646c2, type: 3}
+      propertyPath: m_Time
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783484313913079275, guid: 13ee8100c6d5ceb45812de6a349646c2, type: 3}
+      propertyPath: m_MinVertexDistance
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783484313913079275, guid: 13ee8100c6d5ceb45812de6a349646c2, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783484313913079275, guid: 13ee8100c6d5ceb45812de6a349646c2, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.18354243
+      objectReference: {fileID: 0}
     - target: {fileID: 8900811962766337385, guid: 13ee8100c6d5ceb45812de6a349646c2, type: 3}
       propertyPath: m_Enabled
       value: 0

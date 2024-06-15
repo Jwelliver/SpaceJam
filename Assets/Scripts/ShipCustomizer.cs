@@ -69,6 +69,11 @@ public class ShipCustomizer : MonoBehaviour
                 projectile.transform.GetComponentInChildren<MeshRenderer>().material = laserMaterial;
                 //Set Light
                 projectile.transform.GetComponent<Light>().color = laserColor;
+                //Set Trail
+                TrailRenderer trailRenderer = projectile.GetComponentInChildren<TrailRenderer>();
+                trailRenderer.material=laserMaterial;
+                trailRenderer.startColor = laserColor;
+                trailRenderer.endColor = laserColor;
                 break;
             }
         }
