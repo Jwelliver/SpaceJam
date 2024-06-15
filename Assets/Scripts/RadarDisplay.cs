@@ -121,7 +121,7 @@ public class RadarDisplay : MonoBehaviour
                 break;
             }
             case "ship": {
-                scaleMultiplier= 0.7f;
+                scaleMultiplier= 0.6f;
                 blipColor = Color.red;
                 break;
             }
