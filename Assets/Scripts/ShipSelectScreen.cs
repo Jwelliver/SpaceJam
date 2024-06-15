@@ -6,10 +6,11 @@ using UnityEngine.InputSystem;
 using TMPro;
 
 public enum CustomizableComponentID { //TODO Move to shipcustomizationstore
-    Body=0,
-    Wing=1,
-    Weapons=2,
-    Laser=3
+    Nose=0,
+    Body=1,
+    Wing=2,
+    Weapons=3,
+    Laser=4
 }
 
 public class ShipSelectScreen : MonoBehaviour
@@ -23,7 +24,7 @@ public class ShipSelectScreen : MonoBehaviour
 
     private ShipCustomizationSettings shipCustomizationSettings;
 
-    private int maxComponentId = 3; // TODO: Get Dynamically
+    private int maxComponentId = 4; // TODO: Get Dynamically
 
 
     private CustomizableComponentID selectedComponentId = CustomizableComponentID.Body;
@@ -31,6 +32,9 @@ public class ShipSelectScreen : MonoBehaviour
     private List<Material> shipMaterials;
     private List<Color> laserColors;
 
+    // void Awake() {
+    //     maxComponentId = selectedComponentId.GetValues();
+    // }
 
     void Start() {
         shipCustomizationSettings = player.playerData.shipCustomizationSettings;//ShipCustomizationStore.GetDefaultShipCustomizationSettings();
@@ -54,6 +58,10 @@ public class ShipSelectScreen : MonoBehaviour
 
     void AdjustSelectedColorIndex(int adjustment) {
         switch(selectedComponentId) {
+            case(CustomizableComponentID.Nose): {
+                shipCustomizationSettings.noseMaterialIndex=WrapIndex(shipCustomizationSettings.noseMaterialIndex+adjustment,shipMaterials);
+                break;
+            }
             case(CustomizableComponentID.Body): {
                 shipCustomizationSettings.bodyMaterialIndex=WrapIndex(shipCustomizationSettings.bodyMaterialIndex+adjustment,shipMaterials);
                 break;

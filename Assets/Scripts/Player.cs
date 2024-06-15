@@ -74,10 +74,11 @@ public class ShipCustomizationSettings {
     public int bodyMaterialIndex;
     public int wingMaterialIndex;
     public int weaponMaterialIndex;
+    public int noseMaterialIndex;
     public int laserColorIndex;
 
     public string GetAsString() {
-        return "ShipCustomizationSettings:"+"\nBodyMatIndex: "+bodyMaterialIndex+"\nWingMatIndex: "+wingMaterialIndex+"\nWeaponMatIndex: "+weaponMaterialIndex+"\nLaserColorIndex: "+laserColorIndex;
+        return "ShipCustomizationSettings:"+"\nNoseMatIndex"+noseMaterialIndex+"\nBodyMatIndex: "+bodyMaterialIndex+"\nWingMatIndex: "+wingMaterialIndex+"\nWeaponMatIndex: "+weaponMaterialIndex+"\nLaserColorIndex: "+laserColorIndex;
     }
 
     // public Material hullMaterial;

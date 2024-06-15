@@ -1015,6 +1015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipInterface: {fileID: 2069224595077552354}
+  nose: {fileID: 3361308127566152156}
   body: {fileID: 2745999461125727585}
   wing: {fileID: 8110772175582962280}
 --- !u!1 &2524323973512990926

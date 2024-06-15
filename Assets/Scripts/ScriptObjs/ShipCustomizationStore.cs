@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(menuName ="ScriptObjs/ShipCustomizationStore")]
@@ -10,6 +9,7 @@ public class ShipCustomizationStore : ScriptableObject
     public List<Material> shipMaterials = new List<Material>();
     public List<Color> laserColors;
 
+    public Material defaultNoseMaterial;
     public Material defaultBodyMaterial;
     public Material defaultWingMaterial;
     public Material defaultWeaponMaterial;

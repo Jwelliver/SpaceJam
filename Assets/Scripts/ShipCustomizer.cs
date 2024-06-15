@@ -9,6 +9,7 @@ using UnityEngine;
 public class ShipCustomizer : MonoBehaviour
 {
     [SerializeField] ShipInterface shipInterface;
+    [SerializeField] Transform nose;
     [SerializeField] Transform body;
     [SerializeField] Transform wing;
     ShipCustomizationSettings shipCustomizationSettings;
@@ -43,9 +44,11 @@ public class ShipCustomizer : MonoBehaviour
     public void ApplyShipCustomizationSettings(ShipCustomizationSettings _shipCustomizationSettings) {
         Debug.Log("ShipCustomizer > \n"+_shipCustomizationSettings.GetAsString());
         shipCustomizationSettings = _shipCustomizationSettings; //update local ref
+        Material noseMaterial = ShipCustomizationStore.Instance.shipMaterials[shipCustomizationSettings.noseMaterialIndex];
         Material bodyMaterial = ShipCustomizationStore.Instance.shipMaterials[shipCustomizationSettings.bodyMaterialIndex];
         Material wingMaterial = ShipCustomizationStore.Instance.shipMaterials[shipCustomizationSettings.wingMaterialIndex];
         Material weaponMaterial = ShipCustomizationStore.Instance.shipMaterials[shipCustomizationSettings.weaponMaterialIndex];
+        ApplyMaterial(nose, noseMaterial);
         ApplyMaterial(body, bodyMaterial);
         ApplyMaterial(wing, wingMaterial);
         laserMaterial=ShipCustomizationStore.UpdateLaserMaterial(laserMaterial, shipCustomizationSettings);
