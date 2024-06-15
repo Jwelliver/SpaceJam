@@ -18,10 +18,17 @@ public class ShipCustomizationStore : ScriptableObject
 
     // private static ShipCustomizationStore _Instance;
     public static ShipCustomizationStore Instance;
+    // {get {
+    //     if(_Instance ==null) {
+    //         _Instance = Resources.Load<ShipCustomizationStore>("/ScriptObjs");
+    //     }
+    //     return _Instance;
+        
+    // }}
 
 
     void OnEnable() {
-        if(Instance!=null) {
+        if(Instance!=null && Instance!=this) {
             Destroy(this);
         } else {
             Instance=this;
