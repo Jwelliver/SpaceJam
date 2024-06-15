@@ -200,7 +200,7 @@ public class RadarDisplay : MonoBehaviour
         //Used to check if we should ignore this collider before adding it to trackedObjects
 
         //Exclude any collider that belongs to this ship;
-        // if(col.attachedRigidbody==radarTriggerHandler.col.attachedRigidbody) {return true;}
+        if(!col.gameObject.activeSelf) {return true;}
         if(radar.transform.root==col.transform.root) {return true;}
         if(col.attachedRigidbody.transform.tag.ToLower() == "laser") return true;
         return false;
