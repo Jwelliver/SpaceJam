@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     void OnPlayerLeave(PlayerInput playerInput) {
-        if(playerInputManager.playerCount==0) {
+        if(playerInputManager!=null && playerInputManager.playerCount==0) {
             prejoinUI.SetActive(true);
         }
     }
