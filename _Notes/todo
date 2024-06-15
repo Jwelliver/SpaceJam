@@ -103,18 +103,21 @@
     
 - [] ?  Cockpit interaction control scheme: Use select to toggle between selected components/menus, and directional arrows to interact/change values
 
+- [] Add Controller Vibrations
   ===
 SplitScreen Wrapup
 
 - [] Pass 1: Fix exisiting mechanics
   - [x] Fix Explosion force
-  - [] Missle needs to fire from gun
+  - [x] Missle needs to fire from gun
     - [x] Move missile launch code from ShipController and implement using new weapon/projectile system
     - [x] ? add projectile script to missile prefab 
         | Made missle inherit projectile.
     - [x] Need to instantiate missile properly w/ owner id.
-    - [] Needs full test - Still colliding w/ship and not sure it's detonating properly; May be due to using protected from base class rather than virtual override.
-    - [] Later: Return to todos in: Weapon, Projectile, AmmoRef, and PrefabPool
+    - [x] Needs full test - Still colliding w/ship and not sure it's detonating properly; May be due to using protected from base class rather than virtual override.
+    - [] Projectiles:
+      - [] Later: Return to todos in: Weapon, Projectile, AmmoRef, and PrefabPool
+      - [] Ensure lasers are doing damage
 
   - [] Setup Player manager
     - [x] set playerspawn locations 
@@ -124,9 +127,13 @@ SplitScreen Wrapup
         - [x] Add AssignPlayerInput method to ShipController which subscribes the events and sets the playerInput field;  PlayerManager calls this when spawning a new ship.
           - [x] Setup ShipInterface component and refactor all ship components to reference that
 
-
-- [] Setup Start screen
-  - [] Setup colors on player data class and allow player to change colors for various ship components and lasers
+- [x] Setup Start screen
+  - [x] Setup colors on player data class and allow player to change colors for various ship components and lasers
+  - [x] Setup Player UI StateManager to enable/disable various UI canvases and change control map if needed
+  - [x] Show lasers when selecting laser colors (either show static, or fire)
+  - [x] Fix 3D object scaling
+    | ? Use render texture ?
+  - [x] Add Camera and UI for pre-player join 
 
 - [] Polish
   - [] Fix Radar color-setting; Use RadarTrackable and a scriptableObj ref
@@ -135,4 +142,8 @@ SplitScreen Wrapup
   - [] add explosion fx 
   - [x] Add ship thrust fx
   - [] Try using trail renderer on laser and missile
+  - [] Re-Add Cockpit camera movement
+  - [] CockpitDisplay
+    - [] Make progress bars to replace jittering text
+    - [] Add FlightAssist indicator
   
