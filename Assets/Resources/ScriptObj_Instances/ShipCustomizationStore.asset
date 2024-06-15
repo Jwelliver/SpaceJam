@@ -44,6 +44,7 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0.8999996, a: 1}
   - {r: 1, g: 0, b: 0.6000004, a: 1}
   - {r: 1, g: 0, b: 0.3000002, a: 1}
+  defaultNoseMaterial: {fileID: 2100000, guid: 8f9ee6e42e2005942a5b092cb9f2087c, type: 2}
   defaultBodyMaterial: {fileID: 2100000, guid: 8f9ee6e42e2005942a5b092cb9f2087c, type: 2}
   defaultWingMaterial: {fileID: 2100000, guid: 8f9ee6e42e2005942a5b092cb9f2087c, type: 2}
   defaultWeaponMaterial: {fileID: 2100000, guid: 508a5c5900b3d654ebf40cf88ed14dbf, type: 2}
