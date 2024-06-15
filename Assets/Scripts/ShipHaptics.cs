@@ -138,9 +138,21 @@ public class ShipHaptics : MonoBehaviour
 
     void OnDisable() {
         StopAllCoroutines();
+        gamepad.SetMotorSpeeds(0,0);
         try {
-            gamepad.SetMotorSpeeds(0,0);
+            
         } catch{}
+    }
+
+
+    void OnDestroy() {
+        StopAllCoroutines();
+        try{
+            gamepad.SetMotorSpeeds(0,0);
+        } catch {
+            
+        }
+        
     }
 
 
