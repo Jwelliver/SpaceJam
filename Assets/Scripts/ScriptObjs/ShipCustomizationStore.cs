@@ -16,15 +16,18 @@ public class ShipCustomizationStore : ScriptableObject
     public Material defaultLaserMaterial;
     public Color defaultLaserColor;
 
-    // private static ShipCustomizationStore _Instance;
-    public static ShipCustomizationStore Instance;
-    // {get {
-    //     if(_Instance ==null) {
-    //         _Instance = Resources.Load<ShipCustomizationStore>("/ScriptObjs");
-    //     }
-    //     return _Instance;
-        
-    // }}
+    private static ShipCustomizationStore _Instance;
+    public static ShipCustomizationStore Instance
+    {get {
+        if(_Instance==null) {
+            _Instance = Resources.Load<ShipCustomizationStore>("ScriptObj_Instances");
+        }
+        return _Instance;
+    }
+    set {
+        _Instance=value;
+    }
+    }
 
 
     void OnEnable() {
@@ -39,8 +42,8 @@ public class ShipCustomizationStore : ScriptableObject
     }
 
     void OnDisable() {
-        if(Instance==this) {
-           Instance=null; 
+        if(_Instance==this) {
+           _Instance=null; 
         }
     }
 
