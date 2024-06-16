@@ -74,12 +74,13 @@ public class PlayerData {
 
 }
 
+
 public class ShipCustomizationSettings {
 
+    public int noseMaterialIndex;
     public int bodyMaterialIndex;
     public int wingMaterialIndex;
     public int weaponMaterialIndex;
-    public int noseMaterialIndex;
     public int laserColorIndex;
 
     public string GetAsString() {

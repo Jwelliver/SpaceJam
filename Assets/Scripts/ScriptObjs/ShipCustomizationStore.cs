@@ -70,6 +70,7 @@ public class ShipCustomizationStore : ScriptableObject
 
     public static ShipCustomizationSettings GetDefaultShipCustomizationSettings() {
         ShipCustomizationSettings defaults = new ShipCustomizationSettings();
+        defaults.noseMaterialIndex = Instance.shipMaterials.IndexOf(Instance.defaultNoseMaterial);
         defaults.bodyMaterialIndex = Instance.shipMaterials.IndexOf(Instance.defaultBodyMaterial);
         defaults.wingMaterialIndex= Instance.shipMaterials.IndexOf(Instance.defaultWingMaterial);
         defaults.weaponMaterialIndex = Instance.shipMaterials.IndexOf(Instance.defaultWeaponMaterial);
