@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: shipDamage
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2069224595077552354, guid: 089ba805159853b49b954015fbced5d8, type: 3}
+      propertyPath: shipHaptics
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2288327730125844953, guid: 089ba805159853b49b954015fbced5d8, type: 3}
       propertyPath: m_Name
       value: ShipDisplayModel
@@ -60,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3103696738171524898, guid: 089ba805159853b49b954015fbced5d8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 248508f42dcd00049925f29941b22e00, type: 2}
     - target: {fileID: 3906528394053788081, guid: 089ba805159853b49b954015fbced5d8, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -67,7 +75,7 @@ PrefabInstance:
     - target: {fileID: 4585581749439333366, guid: 089ba805159853b49b954015fbced5d8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3057f5a2b92dd3b47b45415db850c097, type: 2}
+      objectReference: {fileID: 2100000, guid: 248508f42dcd00049925f29941b22e00, type: 2}
     - target: {fileID: 4707211527145946337, guid: 089ba805159853b49b954015fbced5d8, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -152,6 +160,7 @@ PrefabInstance:
     - {fileID: -1080457491725503773, guid: 089ba805159853b49b954015fbced5d8, type: 3}
     - {fileID: 3270561945314373547, guid: 089ba805159853b49b954015fbced5d8, type: 3}
     - {fileID: 7318536809557882384, guid: 089ba805159853b49b954015fbced5d8, type: 3}
+    - {fileID: 5199390450933430681, guid: 089ba805159853b49b954015fbced5d8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
