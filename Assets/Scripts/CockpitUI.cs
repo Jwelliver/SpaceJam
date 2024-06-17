@@ -7,6 +7,7 @@ public class CockpitUI : MonoBehaviour
 {
 
     public ShipInterface shipInterface;
+    [SerializeField] ProgressBar3D energyProgressBar;
     [SerializeField] TMPro.TextMeshProUGUI speedTextMesh;
     [SerializeField] TMPro.TextMeshProUGUI energyTextMesh;
     [SerializeField] TMPro.TextMeshProUGUI damagePctTextMesh;
@@ -21,6 +22,20 @@ public class CockpitUI : MonoBehaviour
     private bool isWarningLightActive = true;
     private float initialWarningLightIntensity;
     public float warningLightBrightnessRate = 10;
+
+    Material[] _energyProgressBarSegmentMaterials;
+    Material[] energyProgressBarSegmentMaterials {
+        get {
+        if(_energyProgressBarSegmentMaterials==null) {
+            List<Material> mats = new List<Material>();
+            foreach(Transform _t in energyProgressBar.GetSegments()) {
+                mats.Add(_t.GetComponent<MeshRenderer>().material);
+            }
+            _energyProgressBarSegmentMaterials = mats.ToArray();
+        }
+        return _energyProgressBarSegmentMaterials;
+        }
+    }
 
     void Awake() {
         shipController = shipInterface.shipController;
@@ -56,8 +71,15 @@ public class CockpitUI : MonoBehaviour
 
     void UpdateEnergyUI()
     {
-        energyTextMesh.SetText("" + Mathf.Round(shipEnergy.currentEnergy));
-        energyTextMesh.color = Color.Lerp(goodColor, badColor, 1 - (shipEnergy.currentEnergy / shipEnergy.maxEnergy));
+        //TODOS:
+        // - Instead of lerping, check for pct ranges and set the color directly. (e.g. green 50-100%, yellow 25-49%, red 0-49%)
+        // - Set alpha of each segment based on the pct range it represents. This will fade out each bar instead of them just popping in and out.
+        float energyPct = shipEnergy.currentEnergy / shipEnergy.maxEnergy;
+        energyProgressBar.SetProgress(energyPct);
+        Color color =  Color.Lerp(goodColor, badColor, 1 - energyPct);
+        for(int i=0; i<energyProgressBar.GetNActiveSegments(); i++) {
+            energyProgressBarSegmentMaterials[i].color = color;
+        }
     }
 
     void UpdateDamageUI()
