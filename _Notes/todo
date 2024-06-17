@@ -44,7 +44,7 @@
 - [] Add EnergyManagement
 
 - [x] Add Camera wobble
-  - [] try w/out physics; And/or look into referencing inertia to programatically move; Or see if there's a way to get spring behavior using acceleration instead of force.
+  - [x] try w/out physics; And/or look into referencing inertia to programatically move; Or see if there's a way to get spring behavior using acceleration instead of force.
 
 - [] Add lookaround movement input?
   - either use left stick and move yaw? Or maybe use left stick while pressed and move DampingDisable to another control
@@ -65,8 +65,6 @@
 
 - [] Add smoke impact between laser and asteroid.
   - [] set fx scale depenndent on laser charge
-
-- [] change power UI to a meter
 
 - [x] Switch project renderer to URP; (to allow cinematic explosions package)
   - already installed URP; Just need to run the Render Pipeline Converter; **May be better off to start a new URP project and just copy in the scripts, reimport the dl'd assets, and remake the materials.
@@ -118,6 +116,7 @@ SplitScreen Wrapup
     - [] Projectiles:
       - [] Later: Return to todos in: Weapon, Projectile, AmmoRef, and PrefabPool
       - [] Ensure lasers are doing damage
+      - [x] (fixed) Missle does not destruct on impact; may be the weird protected/new when inheriting from projectile instead of virtual/override
 
   - [] Setup Player manager
     - [x] set playerspawn locations 
@@ -135,6 +134,9 @@ SplitScreen Wrapup
     | ? Use render texture ?
   - [x] Add Camera and UI for pre-player join 
 
+- [] Deal with multiple listeners issue
+  - ? Create single audio listener object; It has a dedicated audiosource pool for each player; When a sound is played, an audiosource from each player's pool will be positioned around the audiolistener relative to their local postion, and played at once.
+
 - [] Polish
   - [] Fix Radar color-setting; Use RadarTrackable and a scriptableObj ref
   - [] Set asteroid explosion particle to asteroid mesh
@@ -142,10 +144,23 @@ SplitScreen Wrapup
   - [] add explosion fx s
   - [x] Add ship thrust fx
   - [x] Try using trail renderer on laser and missile
-  - [] Re-Add Cockpit camera movement
+  - [x] Re-Add Cockpit camera movement
+  - [] Add cinemachine w/ camera noise
   - [] CockpitDisplay
-    - [] Make progress bars to replace jittering text
-    - [] Add FlightAssist indicator
+    - [x] Text may be fixed by placing it on an independent empty game object, and updating its position manually to be in place
+      | Fixed not by updating it's position manually but by ensuring it wasn't a child to a scaled object
+    - [] Replace TextUI with graphics
+      - [x] Replace Energy UI with progress bar
+      - [] Create speed and direction indicator
+      | Consider using a reference bar to indicate speed; just a line moving across a series of lines to indicate speed; This might also be directional ?
+      - [] Create Ship Damage Indicator
+    - [x] Add FlightAssist indicator
+  - [] Add Glass crack texture on contact points
+    
+  - [] Setup ship customization presets
+    - [] Add ability to create and save a new preset
+
+
 
 - [] Other Fixes
   - [] Make sure environment isn't generated until after player joined
