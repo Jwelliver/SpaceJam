@@ -55,7 +55,7 @@ public class PlayerShipInputHandler : MonoBehaviour
     void OnPitch(InputValue v) => shipController?.OnPitch(v.Get<float>());
     void OnYaw(InputValue v) => shipController?.OnYaw(v.Get<float>());
     void OnThrust(InputValue v) => shipController?.OnThrust(v.Get<float>());
-    void OnToggleFreeFlight() => shipController?.OnToggleFreeFlight();
+    void OnToggleFlightAssist() => shipController?.OnToggleFlightAssist();
 
     // void OnFirePrimary() => shipWeapons.FirePrimary();
     void OnFireSecondary() => shipController?.OnFireSecondary();

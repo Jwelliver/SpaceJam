@@ -26,7 +26,7 @@ public class ShipController : MonoBehaviour
     public float yawInput;
     public float thrustInput;
     // bool isFiring
-    public bool isFreeFlightEnabled;
+    public bool isFlightAssistEnabled;
     Vector3 prevAngularVelocity = new Vector3(0, 0, 0);
 
     void Awake() {
@@ -40,7 +40,7 @@ public class ShipController : MonoBehaviour
     public void OnPitch(float v) => pitchInput = v;
     public void OnYaw(float v) => yawInput = v;
     public void OnThrust(float v) => thrustInput = v;
-    public void OnToggleFreeFlight() => isFreeFlightEnabled = !isFreeFlightEnabled;
+    public void OnToggleFlightAssist() => isFlightAssistEnabled = !isFlightAssistEnabled;
     public void OnFirePrimary() => shipWeapons.FirePrimary();
     public void OnFireSecondary() => shipWeapons.FireSecondary();
 
@@ -99,7 +99,7 @@ public class ShipController : MonoBehaviour
             if (amt > 0) { shipEnergy.OnManeuver(amt); }
 
             //Handle Damping
-            if (!isFreeFlightEnabled) ApplyDamping();
+            if (isFlightAssistEnabled) ApplyDamping();
         }
         else
         {

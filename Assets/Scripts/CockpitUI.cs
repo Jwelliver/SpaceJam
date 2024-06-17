@@ -9,8 +9,8 @@ public class CockpitUI : MonoBehaviour
     public ShipInterface shipInterface;
     [SerializeField] ProgressBar3D energyProgressBar;
     [SerializeField] TMPro.TextMeshProUGUI speedTextMesh;
-    [SerializeField] TMPro.TextMeshProUGUI energyTextMesh;
     [SerializeField] TMPro.TextMeshProUGUI damagePctTextMesh;
+    [SerializeField] TMPro.TextMeshProUGUI flightAssistTextMesh;
     [SerializeField] Light warningLight;
     [SerializeField] Color goodColor = Color.green;
     [SerializeField] Color badColor = Color.red;
@@ -46,6 +46,7 @@ public class CockpitUI : MonoBehaviour
 
     void Start()
     {
+        // flightAssistTextMesh.enabled = !shipController.isFlightAssistEnabled; // init FA UI
         warningLight.enabled = false;
         initialWarningLightIntensity = warningLight.intensity;
     }
@@ -53,6 +54,9 @@ public class CockpitUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Handle FA 
+        HandleFlightAssistUI();
+
         //Update speed
         speedTextMesh.SetText("" + shipController.GetSpeed());
 
@@ -62,10 +66,16 @@ public class CockpitUI : MonoBehaviour
         //Update energy
         UpdateEnergyUI();
 
+
+        //Handle Warning Light
         CheckWarningLight();
-        if (isWarningLightActive)
-        {
-            HandleWarningLight();
+        if (isWarningLightActive) { HandleWarningLight(); }
+    }
+
+    void HandleFlightAssistUI() {
+        // make sure flightassistTextMesh is on when flight assist is disabled and vice versa; (For now, only using indicator as notification when flight assist is disabled )
+        if(flightAssistTextMesh.enabled == shipController.isFlightAssistEnabled) {
+            flightAssistTextMesh.enabled = !shipController.isFlightAssistEnabled;
         }
     }
 

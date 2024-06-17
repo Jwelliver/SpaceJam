@@ -60,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ToggleFreeFlight",
+                    "name": "ToggleFlightAssist",
                     "type": "Button",
                     "id": "95d80487-d23b-43f6-9f43-020d9c5380e6",
                     "expectedControlType": "Button",
@@ -192,7 +192,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ToggleFreeFlight",
+                    "action": "ToggleFlightAssist",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
