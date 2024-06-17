@@ -15,7 +15,6 @@ public class Missile : Projectile
     public float turnRate;
     public float trackingRange = 20;
     public float detonateRange = 2;
-    public float damageRange;
     public float explosiveForce;
     public float armDelay;
     public int ownerId;
@@ -23,16 +22,15 @@ public class Missile : Projectile
     private List<TrackedTarget> trackedTargets = new List<TrackedTarget>();
     private TrackedTarget currentTarget;
 
+    private float damageRange;
+
     private bool isArmed;
 
 
-    new void Awake()
+    void Awake()
     {
-        base.Awake();
-        
        trackingTrigger.radius = trackingRange;
-        damageRange = explosiveForce * 0.01f;
-
+       damageRange=explosiveForce*0.01f;
     }
 
     void Start() {
@@ -48,7 +46,7 @@ public class Missile : Projectile
     }
 
     // Update is called once per frame
-    new void FixedUpdate()
+    protected override void FixedUpdate()
     {
         base.FixedUpdate();
         // rb.velocity = transform.forward * speed;
@@ -131,11 +129,11 @@ public class Missile : Projectile
         }
     }
 
-    new void OnTimeout() {
+    protected override void OnTimeout() {
         base.OnTimeout();
     }
 
-    new void OnLifeOver() {
+    protected override void OnLifeOver() {
         Detonate();
         base.OnLifeOver();
     }

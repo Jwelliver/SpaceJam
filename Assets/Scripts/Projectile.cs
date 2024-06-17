@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[RequireComponent(typeof(Rigidbody))]
 public class Projectile : MonoBehaviour
 {
     [SerializeField] public AmmoType ammoType;
@@ -11,19 +11,16 @@ public class Projectile : MonoBehaviour
     public Weapon sourceWeapon;
 
     // public AmmoPool ammoPool; //TODO: Set this up, and have it assigned by the pool on instatiate.
-    private AmmoDataEntry ammoData;
+
+    private AmmoDataEntry _ammoData;
+    private AmmoDataEntry ammoData { get {if(_ammoData==null) _ammoData=ProjectRefs.ammoRef.GetAmmoData(ammoType); return _ammoData;}}
     // private float speed;
-    protected Rigidbody rb;
+    private Rigidbody _rb;
+    protected Rigidbody rb { get {if(_rb==null)_rb=GetComponent<Rigidbody>(); return _rb;}}
     private Vector3 inheritedVelocity;
     protected float timeFired;
 
-    protected void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-        ammoData = ProjectRefs.ammoRef.GetAmmoData(ammoType);
-    }
-
-    protected void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if(Time.time-timeFired >= ammoData.returnToPoolAfterTime) {OnTimeout();}
         if(ammoData.hasPropulsion) rb.velocity = inheritedVelocity + (transform.forward * ammoData.speed);
@@ -43,20 +40,20 @@ public class Projectile : MonoBehaviour
         OnImpact(collision);
     }
 
-    protected void PlayImpactFX() {
+    protected virtual void PlayImpactFX() {
 
     }
 
-    protected void OnImpact(Collision col) {
+    protected virtual void OnImpact(Collision col) {
         PlayImpactFX();
         OnLifeOver();
     }
 
-    protected void OnTimeout() {
+    protected virtual void OnTimeout() {
         OnLifeOver();
     }
 
-    protected void OnLifeOver() {
+    protected virtual void OnLifeOver() {
         gameObject.SetActive(false);
         ResetSelf();
         sourceWeapon.ammoPool.ReturnToPool(transform);
