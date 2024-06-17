@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9047525068044279362}
   - component: {fileID: 3445768148110150282}
-  - component: {fileID: 4464159743873855096}
   - component: {fileID: 8900811962766337385}
+  - component: {fileID: 4464159743873855096}
   - component: {fileID: 4399443337310232857}
   - component: {fileID: 5075901101660221310}
   - component: {fileID: 4783484313913079275}
@@ -66,6 +66,20 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!114 &8900811962766337385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3319725371377787557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c07a6e30d0e1f948ab0c06eef521074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoType: 0
+  sourceWeapon: {fileID: 0}
 --- !u!108 &4464159743873855096
 Light:
   m_ObjectHideFlags: 0
@@ -128,20 +142,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &8900811962766337385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3319725371377787557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c07a6e30d0e1f948ab0c06eef521074, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ammoType: 0
-  sourceWeapon: {fileID: 0}
 --- !u!135 &4399443337310232857
 SphereCollider:
   m_ObjectHideFlags: 0
