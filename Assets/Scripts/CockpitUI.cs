@@ -46,7 +46,6 @@ public class CockpitUI : MonoBehaviour
 
     void Start()
     {
-        // flightAssistTextMesh.enabled = !shipController.isFlightAssistEnabled; // init FA UI
         warningLight.enabled = false;
         initialWarningLightIntensity = warningLight.intensity;
     }
@@ -65,7 +64,6 @@ public class CockpitUI : MonoBehaviour
 
         //Update energy
         UpdateEnergyUI();
-
 
         //Handle Warning Light
         CheckWarningLight();
