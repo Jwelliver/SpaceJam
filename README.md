@@ -1,7 +1,10 @@
 A multiplayer 3D game for dogfighting your friends in space.
-Note: This is a personal gamejam-type sideproject that I put together for friends and I to play. It's not a top priority for me as I reached my initial development goal, but I do expect to casually continue development.
+
+Note:
+This is a personal gamejam-type sideproject that I put together for friends and I to play. It's not a top priority for me as I reached my initial development goal, but I do expect to casually continue development.
 
 **Current Status**
+
 The game is functional with a solid foundation for additional features.
 For the most part, it utilizes "dev art" as I intended to spend as little time as possible getting to a working game. (e.g. ships are composed almost entirely of primatives rather than having a dedicated model)
 
@@ -17,6 +20,7 @@ For the most part, it utilizes "dev art" as I intended to spend as little time a
 - Energy Management: Manuevering and fireing weapons consume energy, which regenerates over time. Players aren't able to just "run and gun" their way through a fight, but instead must monitor and manage their ship's energy levels wisely, or risk being at a severe disadvantage awaiting recharge with no systems online.
 
 **Future Features**
+
 Note: While this was a sideproject I spent a bit too much time on, eventually needing to switch my focus elsewhere, I have built a good foundation for some fun features I'd always wanted in a space flight sim.
 So, there's no expected timeline, but I have no doubt I'll be putting more work into this here and there. If you're interested taking it up, feel free to fork and/or make a PR.
 
